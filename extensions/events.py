@@ -18,8 +18,18 @@ class Events:
         self.bot = bot
 
     async def on_ready(self):
-        print(f'Logged in as {self.bot.user.name}')
+        print('Logged in as ' + self.bot.user.name + " ID: " + (str(self.bot.user.id)))
+        print('--------')
+        print('Current Discord.py Version: {} | Current Python Version: {}'.format(discord.__version__, platform.python_version()))
+        print('--------')
+        print('Use this link to invite {}:'.format(self.bot.user.name))
+        print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(self.bot.user.id))
+        print('--------')
+        print('Created by Apple#1337')
+
+        #print(f'Logged in as {self.bot.user.name}')
         self.bot.invite_url = discord.utils.oauth_url(self.bot.user.id)
+        await self.bot.change_presence(activity=discord.Game(type=0, name="Apple<3"), status=discord.Status.dnd)
 
     async def on_command_error(self, ctx, exception):
         if isinstance(exception, errors.MissingRequiredArgument):

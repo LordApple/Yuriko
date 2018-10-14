@@ -1,9 +1,11 @@
 import discord
-
+import time
+import random
 
 from discord.ext import commands
 from random import randint
 from random import choice
+from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify
 
 class Misc:
     def __init__(self, bot,):
@@ -40,6 +42,76 @@ class Misc:
             await ctx.send("`" + choice(self.ball) + "`")
         else:
             await ctx.send("That doesn't look like a question.")
+    
+    @commands.command()
+    async def guildcount(self, ctx):
+        """Bot Guild Count"""
+        servers = bold (len((self.bot.guilds)))
+        await ctx.send("I'm in " + servers + " Guilds!")
+        #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))
+    
+    @commands.command(pass_context=True, no_pm=True)
+    async def guildicon(self, ctx):
+        """Guild Icon"""
+        await ctx.send(" {}".format(ctx.message.guild.icon_url))
+
+    @commands.command(no_pm=True)
+    async def hug(self, ctx, user : discord.Member, intensity : int=1):
+        """Because everyone likes hugs
+
+        Up to 10 intensity levels."""
+        name = italics(user.display_name)
+        if intensity <= 0:
+            msg = "(っ˘̩╭╮˘̩)っ" + name
+        elif intensity <= 3:
+            msg = "(っ´▽｀)っ" + name
+        elif intensity <= 6:
+            msg = "╰(*´︶`*)╯" + name
+        elif intensity <= 9:
+            msg = "(つ≧▽≦)つ" + name
+        elif intensity >= 10:
+            msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
+        await ctx.send(msg)
+
+    @commands.command(pass_context=True)
+    async def ping(self,ctx):
+        """ping time"""
+        t1 = time.perf_counter()
+        await ctx.send("Pong :ping_pong:")
+        t2 = time.perf_counter()
+        await ctx.send("ping: {}ms".format(round((t2-t1)*1000)))
+
+    @commands.command(pass_context=True)
+    async def pickle(self, ctx, *users: discord.Member):
+        """Detects user's pickle length
+        This is 100% accurate.
+        Enter multiple users for an accurate comparison!"""
+
+        if not users:
+            await ctx.send("Please mention a user.")
+            return        
+
+        dongs = {}
+        msg = ""
+        state = random.getstate()
+
+        for user in users:
+            random.seed(user.id)
+            dongs[user] = "8{}D".format("=" * random.randint(0, 30))
+
+        random.setstate(state)
+        dongs = sorted(dongs.items(), key=lambda x: x[1])
+
+        for user, dong in dongs:
+            msg += "**{}'s size:**\n{}\n".format(user.display_name, dong)
+
+        for page in pagify(msg):
+            await ctx.send(page)
+
+    @commands.command()
+    async def cat(self, ctx):
+        """ Posts a random cat """
+        await ctx.randomimageapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
 
 
 
