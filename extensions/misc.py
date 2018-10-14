@@ -1,10 +1,15 @@
 import discord
 import time
+import os
+import psutil
 import random
+import json
+from datetime import datetime
 
 from discord.ext import commands
 from random import randint
 from random import choice
+from extensions.tools import default, config_forwarder, http, perms
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify
 
 class Misc:
@@ -50,7 +55,8 @@ class Misc:
         await ctx.send("I'm in " + servers + " Guilds!")
         #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))
     
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True)
+    @commands.guild_only()
     async def guildicon(self, ctx):
         """Guild Icon"""
         await ctx.send(" {}".format(ctx.message.guild.icon_url))
@@ -109,9 +115,105 @@ class Misc:
             await ctx.send(page)
 
     @commands.command()
+    async def reverse(self, ctx, *, text: str):
+        """ !poow ,ffuts esreveR
+        Everything you type after reverse will of course, be reversed
+        """
+        t_rev = text[::-1].replace("@", "@\u200B").replace("&", "&\u200B")
+        await ctx.send(f"🔁 {t_rev}")
+
+    @commands.group()
+    @commands.guild_only()
+    async def server(self, ctx):
+        """ Check info about current server """
+        if ctx.invoked_subcommand is None:
+            findbots = sum(1 for member in ctx.guild.members if member.bot)
+
+            embed = discord.Embed()
+            embed.set_thumbnail(url=ctx.guild.icon_url)
+            embed.add_field(name="Server Name", value=ctx.guild.name, inline=True)
+            embed.add_field(name="Server ID", value=ctx.guild.id, inline=True)
+            embed.add_field(name="Members", value=ctx.guild.member_count, inline=True)
+            embed.add_field(name="Bots", value=findbots, inline=True)
+            embed.add_field(name="Owner", value=ctx.guild.owner, inline=True)
+            embed.add_field(name="Region", value=ctx.guild.region, inline=True)
+            embed.add_field(name="Created", value=default.date(ctx.guild.created_at), inline=True)
+            await ctx.send(content=f"ℹ information about **{ctx.guild.name}**", embed=embed)
+
+
+    @commands.command()
+    @commands.guild_only()
+    async def user(self, ctx, *, user: discord.Member = None):
+        """ Get user information """
+        if user is None:
+            user = ctx.author
+
+        embed = discord.Embed(colour=user.top_role.colour.value)
+        embed.set_thumbnail(url=user.avatar_url)
+
+        embed.add_field(name="Full name", value=user, inline=True)
+        embed.add_field(name="Nickname", value=user.nick if hasattr(user, "nick") else "None", inline=True)
+        embed.add_field(name="Account created", value=default.date(user.created_at), inline=True)
+        embed.add_field(name="Joined this server", value=default.date(user.joined_at), inline=True)
+
+        embed.add_field(
+            name="Roles",
+            value=', '.join([f"<@&{x.id}>" for x in user.roles if x is not ctx.guild.default_role]) if len(user.roles) > 1 else 'None',
+            inline=False
+        )
+
+        await ctx.send(content=f"ℹ About **{user.id}**", embed=embed)
+
+    async def randomimageapi(self, ctx, url, endpoint):
+        try:
+            r = await http.get(url, res_method="json", no_cache=True)
+        except json.JSONDecodeError:
+            return await ctx.send("Couldn't find anything from the API")
+
+        await ctx.send(r[endpoint])
+
+    @commands.command()
     async def cat(self, ctx):
         """ Posts a random cat """
-        await ctx.randomimageapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
+        await self.randomimageapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
+
+    @commands.command()
+    async def dog(self, ctx):
+        """ Posts a random dog """
+        await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
+
+    @commands.command()
+    async def urban(self, ctx, *, search: str):
+        """ Find the 'best' definition to your words """
+        if not perms.can_embed(ctx):
+            return await ctx.send("I cannot send embeds here ;-;")
+
+        url = await http.get(f'http://api.urbandictionary.com/v0/define?term={search}', res_method="json")
+
+        if url is None:
+            return await ctx.send("I think the API broke...")
+
+        count = len(url['list'])
+        if count == 0:
+            return await ctx.send("Couldn't find your search in the dictionary...")
+        result = url['list'][random.randint(0, count - 1)]
+
+        definition = result['definition']
+        if len(definition) >= 1000:
+                definition = definition[:1000]
+                definition = definition.rsplit(' ', 1)[0]
+                definition += '...'
+
+        embed = discord.Embed(colour=0xC29FAF, description=f"**{result['word']}**\n*by: {result['author']}*")
+        embed.add_field(name='Definition', value=definition, inline=False)
+        embed.add_field(name='Example', value=result['example'], inline=False)
+        embed.set_footer(text=f"👍 {result['thumbs_up']} | 👎 {result['thumbs_down']}")
+
+        try:
+            await ctx.send(embed=embed)
+        except discord.Forbidden:
+            await ctx.send("I found something, but have no access to post it... [Embed permissions]")
+
 
 
 
