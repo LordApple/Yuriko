@@ -24,7 +24,11 @@ class Misc:
     @commands.command(pass_context=True, no_pm=True)
     async def avatar(self, ctx, member: discord.Member):
         """User Avatar"""
-        await ctx.send(" {}".format(member.avatar_url))
+        author = member.display_name
+        embed = discord.Embed()
+        embed=discord.Embed(color=0x3ef301, title="{}'s avatar".format(author))
+        embed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
     async def roll(self, ctx, number : int = 100):
@@ -129,7 +133,7 @@ class Misc:
         if ctx.invoked_subcommand is None:
             findbots = sum(1 for member in ctx.guild.members if member.bot)
 
-            embed = discord.Embed()
+            embed = discord.Embed(title="ℹ information about **{}**".format(ctx.guild.name), color=0x3ef301)
             embed.set_thumbnail(url=ctx.guild.icon_url)
             embed.add_field(name="Server Name", value=ctx.guild.name, inline=True)
             embed.add_field(name="Server ID", value=ctx.guild.id, inline=True)
@@ -138,7 +142,7 @@ class Misc:
             embed.add_field(name="Owner", value=ctx.guild.owner, inline=True)
             embed.add_field(name="Region", value=ctx.guild.region, inline=True)
             embed.add_field(name="Created", value=default.date(ctx.guild.created_at), inline=True)
-            await ctx.send(content=f"ℹ information about **{ctx.guild.name}**", embed=embed)
+            await ctx.send(embed=embed)
 
 
     @commands.command()
@@ -148,9 +152,8 @@ class Misc:
         if user is None:
             user = ctx.author
 
-        embed = discord.Embed(colour=user.top_role.colour.value)
+        embed = discord.Embed(colour=user.top_role.colour.value, title="ℹ About **{}**".format(user.id))
         embed.set_thumbnail(url=user.avatar_url)
-
         embed.add_field(name="Full name", value=user, inline=True)
         embed.add_field(name="Nickname", value=user.nick if hasattr(user, "nick") else "None", inline=True)
         embed.add_field(name="Account created", value=default.date(user.created_at), inline=True)
@@ -162,7 +165,7 @@ class Misc:
             inline=False
         )
 
-        await ctx.send(content=f"ℹ About **{user.id}**", embed=embed)
+        await ctx.send(embed=embed)
 
     async def randomimageapi(self, ctx, url, endpoint):
         try:
@@ -171,6 +174,19 @@ class Misc:
             return await ctx.send("Couldn't find anything from the API")
 
         await ctx.send(r[endpoint])
+
+    @commands.command()
+    async def kiss(self, ctx, user : discord.Member):
+        """ Give someone a kiss OwO """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " got a kiss from " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
+
+    @commands.command()
+    async def neko(self, ctx):
+        """ Posts a picture of a neko """
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/neko', 'url')
 
     @commands.command()
     async def cat(self, ctx):

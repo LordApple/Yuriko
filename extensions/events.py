@@ -29,7 +29,7 @@ class Events:
 
         #print(f'Logged in as {self.bot.user.name}')
         self.bot.invite_url = discord.utils.oauth_url(self.bot.user.id)
-        await self.bot.change_presence(activity=discord.Game(type=0, name="🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔"), status=discord.Status.dnd)
+        await self.bot.change_presence(activity=discord.Game(type=3, name="🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔"), status=discord.Status.dnd)
 
     async def on_command_error(self, ctx, exception):
         if isinstance(exception, errors.MissingRequiredArgument):

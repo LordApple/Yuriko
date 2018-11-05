@@ -36,6 +36,7 @@ class Owner:
                 await ctx.send("Successfuly changed game to {}".format(game))
 
     @commands.command(pass_context=True)
+    @commands.is_owner()
     async def setname(self, ctx, *, name):
         name = name.strip()
         if name != "":
@@ -45,6 +46,11 @@ class Owner:
                 await ctx.send("Failed to change name")
             else:
                 await ctx.send("Successfuly changed name to {}".format(name))
+
+    @commands.command()
+    @commands.is_owner()
+    async def file(self, ctx):
+        await ctx.send(file=discord.File('test.png'))
 
 def setup(bot):
     bot.add_cog(Owner(bot))
