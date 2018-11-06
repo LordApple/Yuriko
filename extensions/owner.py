@@ -2,6 +2,7 @@ import discord
 import aiohttp
 from discord.ext import commands
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
+from extensions.tools import config_forwarder
 
 class Owner:
     def __init__(self, bot,):
@@ -23,10 +24,16 @@ class Owner:
         await self.bot.user.edit(avatar=data)
         await ctx.send("Avatar changed")
 
-    @commands.command()
-    @commands.is_owner()
+    @commands.command(aliases=["msg"])
     async def message(self, ctx, user : discord.Member, *, message):
-        await user.send(message)
+        author = ctx.message.author.display_name
+        if ctx.author.id in config_forwarder.owners:
+            await user.send(message)
+            print("User " + author + " used the msg command")
+        else:
+            embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
+            await ctx.send(embed=embed)
+            print("User " + author + " tried to use the msg command.")
     
     @commands.command()
     @commands.is_owner()
