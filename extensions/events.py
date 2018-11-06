@@ -12,10 +12,13 @@ import sys
 import platform
 from discord.ext.commands import errors
 
+games = ["How to commit die 101.", "🤔🤔🤔🤔🤔🤔", "nhentai.net", "☭ The Communist Manifesto ☭"]
 
 class Events:
     def __init__(self, bot):
         self.bot = bot
+
+
 
     async def on_ready(self):
         print('Logged in as ' + self.bot.user.name + "  ID: " + (str(self.bot.user.id)))
@@ -29,7 +32,9 @@ class Events:
 
         #print(f'Logged in as {self.bot.user.name}')
         self.bot.invite_url = discord.utils.oauth_url(self.bot.user.id)
-        await self.bot.change_presence(activity=discord.Game(type=3, name="🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔 🤔"), status=discord.Status.dnd)
+        game = discord.Streaming(name=random.choice(games), url="https://www.twitch.tv/twitchbot_discord/")
+        await self.bot.change_presence(status=discord.Status.dnd, activity=game)
+    
 
     async def on_command_error(self, ctx, exception):
         if isinstance(exception, errors.MissingRequiredArgument):

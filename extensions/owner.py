@@ -29,7 +29,21 @@ class Owner:
         game = game.strip()
         if game != "":
             try:
-                await self.bot.change_presence(activity=discord.Game(type=0, name=game), status=discord.Status.dnd)
+                game = discord.Game(name=game)
+                await self.bot.change_presence(status=discord.Status.dnd, activity=game)
+            except:
+                await ctx.send("Failed to change game")
+            else:
+                await ctx.send("Successfuly changed game to {}".format(game))
+    
+    @commands.command()
+    @commands.is_owner()
+    async def setstream(self, ctx, *, game):
+        game = game.strip()
+        if game != "":
+            try:
+                game = discord.Streaming(name=game, url="https://www.twitch.tv/twitchbot_discord/")
+                await self.bot.change_presence(status=discord.Status.dnd, activity=game)
             except:
                 await ctx.send("Failed to change game")
             else:
