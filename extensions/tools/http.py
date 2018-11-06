@@ -3,8 +3,6 @@ import aiohttp
 
 from extensions.tools import cache
 
-
-# Removes the aiohttp ClientSession instance warning.
 class HTTPSession(aiohttp.ClientSession):
     """ Abstract class for aiohttp. """
 

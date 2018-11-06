@@ -27,7 +27,7 @@ class Misc:
         author = member.display_name
         embed = discord.Embed()
         embed=discord.Embed(color=0x3ef301, title="{}'s avatar".format(author))
-        embed.set_thumbnail(url=member.avatar_url)
+        embed.set_image(url=member.avatar_url)
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
@@ -63,9 +63,15 @@ class Misc:
     @commands.guild_only()
     async def guildicon(self, ctx):
         """Guild Icon"""
-        await ctx.send(" {}".format(ctx.message.guild.icon_url))
+        server = ctx.message.guild.name
+        embed = discord.Embed()
+        embed=discord.Embed(color=0x3ef301, title="{}'s icon".format(server))
+        embed.set_image(url=ctx.message.guild.icon_url)
+        await ctx.send(embed=embed)
+        #await ctx.send(" {}".format(ctx.message.guild.icon_url))
 
-    @commands.command(no_pm=True)
+    #my old hug code.
+    '''@commands.command(no_pm=True)
     async def hug(self, ctx, user : discord.Member, intensity : int=1):
         """Because everyone likes hugs
 
@@ -81,7 +87,7 @@ class Misc:
             msg = "(つ≧▽≦)つ" + name
         elif intensity >= 10:
             msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
-        await ctx.send(msg)
+        await ctx.send(msg)'''
 
     @commands.command(pass_context=True)
     async def ping(self,ctx):
@@ -182,6 +188,14 @@ class Misc:
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got a kiss from " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
+    
+    @commands.command()
+    async def hug(self, ctx, user : discord.Member):
+        """ Give someone a hug UwU """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " got a hug from " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/hug', 'url')
 
     @commands.command()
     async def neko(self, ctx):
