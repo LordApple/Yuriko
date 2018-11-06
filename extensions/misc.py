@@ -21,7 +21,7 @@ class Misc:
                     "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
                     "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True)
     async def avatar(self, ctx, member: discord.Member):
         """User Avatar"""
         author = member.display_name
