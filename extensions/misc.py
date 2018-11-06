@@ -48,9 +48,15 @@ class Misc:
         Question must end with a question mark.
         """
         if question.endswith("?") and question != "?":
-            await ctx.send("`" + choice(self.ball) + "`")
+            embed = discord.Embed(color=0x3ef301)
+            embed.add_field(name="8ball response.", value="" + choice(self.ball) + "")
+            await ctx.send(embed=embed)
+            #await ctx.send("`" + choice(self.ball) + "`")
         else:
-            await ctx.send("That doesn't look like a question.")
+            embederror = discord.Embed(color=0xff0022)
+            embederror.add_field(name="That doesn't look like a question.", value="Question must end with a question mark.")
+            await ctx.send(embed=embederror)
+            #await ctx.send("That doesn't look like a question.")
     
     @commands.command()
     async def guildcount(self, ctx):
