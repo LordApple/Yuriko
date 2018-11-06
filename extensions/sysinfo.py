@@ -19,13 +19,17 @@ class SysInfo:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(pass_context=True, aliases=['sys'])
+    @commands.group(aliases=['sys'])
     async def sysinfo(self, ctx):
         """Shows system information for the machine running the bot"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("invalid sub command")
+            command = ctx.invoked_subcommand or ctx.command
+            _help = await ctx.bot.formatter.format_help_for(ctx, command)
 
-    @sysinfo.command(pass_context=True)
+            for page in _help:
+                await ctx.send(page)
+
+    @sysinfo.command()
     @commands.is_owner()
     async def info(self, ctx, *args: str):
         """Summary of cpu, memory, disk and network information
@@ -129,7 +133,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def df(self, ctx):
         """File system disk space usage"""
@@ -160,7 +164,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def free(self, ctx):
         """Amount of free and used memory in the system"""
@@ -190,7 +194,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def ifconfig(self, ctx):
         """Network interface information"""
@@ -241,7 +245,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def iotop(self, ctx):
         """Snapshot of I/O usage information output by the kernel"""
@@ -308,7 +312,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def meminfo(self, ctx):
         """System memory information"""
@@ -320,7 +324,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def netstat(self, ctx):
         """Information about the networking subsystem"""
@@ -359,7 +363,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def nettop(self, ctx):
         """Snapshot of real-time network statistics"""
@@ -416,7 +420,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def smem(self, ctx):
         """Physical memory usage, taking shared memory pages into account"""
@@ -469,7 +473,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def ps(self, ctx):
         """Information about active processes"""
@@ -550,7 +554,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def top(self, ctx):
         """Snapshot of real-time system information and tasks"""
@@ -665,7 +669,7 @@ class SysInfo:
         await self._say(ctx, msg)
         return
 
-    @sysinfo.command(pass_context=True)
+    @sysinfo.command()
     @commands.is_owner()
     async def who(self, ctx):
         """Shows which users are currently logged in"""

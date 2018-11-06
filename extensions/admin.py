@@ -9,13 +9,13 @@ class Admin:
     def __init__(self, bot,):
         self.bot = bot
 
-    @commands.command(no_pm=True)
+    @commands.command()
     @perms.has_permissions(kick_members=True)
     @commands.guild_only()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
         await ctx.guild.kick(user)
 
-    @commands.command(pass_context=True)
+    @commands.command()
     @perms.has_permissions(ban_members=True)
     @commands.guild_only()
     async def ban(self, ctx, user: discord.Member, *, reason: str = None):

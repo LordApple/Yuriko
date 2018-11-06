@@ -21,7 +21,7 @@ class Misc:
                     "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
                     "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def avatar(self, ctx, member: discord.Member):
         """User Avatar"""
         author = member.display_name
@@ -30,7 +30,7 @@ class Misc:
         embed.set_image(url=member.avatar_url)
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def roll(self, ctx, number : int = 100):
         """Rolls random number (between 1 and user choice)
         Defaults to 100.
@@ -65,7 +65,7 @@ class Misc:
         await ctx.send("I'm in " + servers + " Guilds!")
         #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))
     
-    @commands.command(pass_context=True)
+    @commands.command()
     @commands.guild_only()
     async def guildicon(self, ctx):
         """Guild Icon"""
@@ -95,7 +95,7 @@ class Misc:
             msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
         await ctx.send(msg)'''
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def ping(self,ctx):
         """ping time"""
         t1 = time.perf_counter()
@@ -103,7 +103,7 @@ class Misc:
         t2 = time.perf_counter()
         await ctx.send("ping: {}ms".format(round((t2-t1)*1000)))
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def pickle(self, ctx, *users: discord.Member):
         """Detects user's pickle length
         This is 100% accurate.
