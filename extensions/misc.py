@@ -217,7 +217,7 @@ class Misc:
     async def dog(self, ctx):
         """ Posts a random dog """
         await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
-
+    
     @commands.command()
     async def urban(self, ctx, *, search: str):
         """ Find the 'best' definition to your words """

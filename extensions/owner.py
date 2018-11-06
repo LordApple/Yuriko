@@ -1,7 +1,7 @@
 import discord
 import aiohttp
 from discord.ext import commands
-
+from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
 class Owner:
     def __init__(self, bot,):
@@ -22,6 +22,17 @@ class Owner:
                 data = await r.read()
         await self.bot.user.edit(avatar=data)
         await ctx.send("Avatar changed")
+
+    @commands.command()
+    @commands.is_owner()
+    async def message(self, ctx, user : discord.Member, *, message):
+        await user.send(message)
+    
+    @commands.command()
+    @commands.is_owner()
+    async def say(self, ctx, *, message):
+        await ctx.message.delete()
+        await ctx.send(message)
 
     @commands.command()
     @commands.is_owner()
