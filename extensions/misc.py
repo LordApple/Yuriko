@@ -24,8 +24,10 @@ class Misc:
                     "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
     @commands.command()
-    async def avatar(self, ctx, member: discord.Member):
+    async def avatar(self, ctx, member: discord.Member = None):
         """User Avatar"""
+        if member is None:
+            member = ctx.author
         author = member.display_name
         embed = discord.Embed()
         embed=discord.Embed(color=0x3ef301, title="{}'s avatar".format(author))
@@ -190,12 +192,17 @@ class Misc:
         await ctx.send(r[endpoint])
 
     @commands.command()
-    async def kiss(self, ctx, user : discord.Member):
+    async def kiss(self, ctx, user : discord.Member = None):
         """ Give someone a kiss OwO """
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(author) + " got a kiss from " + "{}".format(user)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
+        if user is None:
+            user = ctx.author.display_name
+            await ctx.send("Bruh, try to kiss yourself irl first.")
+            return
+        else:
+            author = user.display_name
+            user = ctx.author.display_name
+            await ctx.send(italics("{}".format(author) + " got a kiss from " + "{}".format(user)))
+            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
     
     @commands.command()
     async def hug(self, ctx, user : discord.Member):
@@ -220,31 +227,6 @@ class Misc:
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got a pat from " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pat', 'url')
-
-    @commands.command()
-    async def blow(self, ctx, user : discord.Member):
-        """ Give someone a blow ( ͡° ͜ʖ ͡°) """
-        if ctx.channel.is_nsfw() != True:
-            embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
-        else:
-            author = user.display_name
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(author) + " Got a blowjob from " + "{}".format(user)))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
-
-    @commands.command()
-    async def nsfwavatar(self, ctx):
-        """ Gives you a NSFW avatar """
-        if ctx.channel.is_nsfw() != True:
-            embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
-        else:
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(user) + ", Here is your avatarç"))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_avatar', 'url')
 
     @commands.command()
     async def giveavatar(self, ctx):
