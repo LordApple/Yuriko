@@ -231,7 +231,6 @@ class Misc:
         elif user is ctx.author:
             await ctx.send("So you can manage to tickle yourself huh")
             return
-        author = user.displ
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " tickled " + "{}".format(user)))
