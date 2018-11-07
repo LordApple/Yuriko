@@ -10,7 +10,7 @@ from discord.ext import commands
 from random import randint
 from random import choice
 from extensions.tools import default, config_forwarder, http, perms
-from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify
+from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
 embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]
 
@@ -75,13 +75,24 @@ class Misc:
         servers = bold (len((self.bot.guilds)))
         await ctx.send("I'm in " + servers + " Guilds!")
         #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))
-    
+
+    @commands.command()
+    async def serverlist(self, ctx):
+        """Lists all bot servers"""
+        msg = 'servers'
+        for server in self.bot.guilds:
+            msg = msg + '\n' + str(server)
+        msg = msg + '\n'
+        embed = discord.Embed(color=0x3ef301,title="Im in {}".format(len(self.bot.guilds)) + " guilds")
+        embed.add_field(name="Server list", value=msg)
+        await ctx.send(embed=embed)
+
+
     @commands.command()
     @commands.guild_only()
     async def guildicon(self, ctx):
         """Guild Icon"""
         server = ctx.message.guild.name
-        embed = discord.Embed()
         embed=discord.Embed(color=choice(embedcolors), title="{}'s icon".format(server))
         embed.set_image(url=ctx.message.guild.icon_url)
         await ctx.send(embed=embed)
