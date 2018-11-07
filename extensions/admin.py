@@ -61,7 +61,7 @@ class Admin:
         except Exception as e:
             await ctx.send(e)
 
-    @commands.command()
+    @commands.command(aliases=["prune"])
     @perms.has_permissions(manage_messages=True)
     @commands.guild_only()
     async def purge(self, ctx, amount: int):
