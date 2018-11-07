@@ -197,6 +197,9 @@ class Misc:
             user = ctx.author.display_name
             await ctx.send("Bruh, try to kiss yourself irl first.")
             return
+        elif user is ctx.author:
+            await ctx.send("Bruh, try to kiss yourself irl first.")
+            return
         else:
             author = user.display_name
             user = ctx.author.display_name
