@@ -79,10 +79,5 @@ class Owner:
             else:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
-    @commands.command()
-    @commands.is_owner()
-    async def file(self, ctx):
-        await ctx.send(file=discord.File('test.png'))
-
 def setup(bot):
     bot.add_cog(Owner(bot))

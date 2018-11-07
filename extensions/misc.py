@@ -12,7 +12,7 @@ from random import choice
 from extensions.tools import default, config_forwarder, http, perms
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify
 
-embedcolors = [0x12a8a8, 0x2807ff]
+embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]
 
 class Misc:
     def __init__(self, bot,):
