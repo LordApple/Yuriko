@@ -224,10 +224,15 @@ class Misc:
     @commands.command()
     async def blow(self, ctx, user : discord.Member):
         """ Give someone a blow ( ͡° ͜ʖ ͡°) """
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(user) + " Got a blowjob from " + "{}".format(author)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
+        if ctx.channel.is_nsfw() != True:
+            embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            await ctx.send(embed=embed)
+            return
+        else:
+            author = user.display_name
+            user = ctx.author.display_name
+            await ctx.send(italics("{}".format(author) + " Got a blowjob from " + "{}".format(user)))
+            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
 
     @commands.command()
     async def cuddle(self, ctx, user : discord.Member):
