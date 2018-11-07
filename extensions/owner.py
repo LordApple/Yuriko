@@ -38,10 +38,10 @@ class Owner:
             print("User " + author + " tried to use the msg command.")
 
     @commands.command(aliases=["smsg"])
-    async def smessage(self, ctx, user : discord.Member, *, message):
+    async def smessage(self, ctx, spamamt, user : discord.Member, *, message):
         author = ctx.message.author.display_name
         if ctx.author.id in config_forwarder.owners:
-            spamamt = int(input("Enter the amt of spam u want:"))
+            spamamt = int(spamamt)
             for x in range(0, spamamt):
                 time.sleep(1)
                 await user.send(message)
