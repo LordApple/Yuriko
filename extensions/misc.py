@@ -18,6 +18,14 @@ class Misc:
     def __init__(self, bot,):
         self.bot = bot
 
+    async def randomimageapi(self, ctx, url, endpoint):
+        try:
+            r = await http.get(url, res_method="json", no_cache=True)
+        except json.JSONDecodeError:
+            return await ctx.send("Couldn't find anything from the API")
+
+        await ctx.send(r[endpoint])
+
         self.ball = ["As I see it, yes", "It is certain", "It is decidedly so", "Most likely", "Outlook good",
                     "Signs point to yes", "Without a doubt", "Yes", "Yes – definitely", "You may rely on it", "Reply hazy, try again",
                     "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
@@ -182,14 +190,6 @@ class Misc:
         )
 
         await ctx.send(embed=embed)
-
-    async def randomimageapi(self, ctx, url, endpoint):
-        try:
-            r = await http.get(url, res_method="json", no_cache=True)
-        except json.JSONDecodeError:
-            return await ctx.send("Couldn't find anything from the API")
-
-        await ctx.send(r[endpoint])
 
     @commands.command()
     async def kiss(self, ctx, user : discord.Member = None):
