@@ -61,6 +61,12 @@ class Admin:
         except Exception as e:
             await ctx.send(e)
 
+    @commands.command()
+    @perms.has_permissions(manage_messages=True)
+    @commands.guild_only()
+    async def purge(self, ctx, amount: int):
+        deleted = await ctx.channel.purge(limit=amount)
+        await ctx.send(f"Deleted {len(deleted)} messages")
 
 def setup(bot):
     bot.add_cog(Admin(bot))
