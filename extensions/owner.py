@@ -1,5 +1,7 @@
 import discord
 import aiohttp
+import time
+
 from discord.ext import commands
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 from extensions.tools import config_forwarder
@@ -30,6 +32,20 @@ class Owner:
         if ctx.author.id in config_forwarder.owners:
             await user.send(message)
             print("User " + author + " used the msg command")
+        else:
+            embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
+            await ctx.send(embed=embed)
+            print("User " + author + " tried to use the msg command.")
+
+    @commands.command(aliases=["smsg"])
+    async def smessage(self, ctx, user : discord.Member, *, message):
+        author = ctx.message.author.display_name
+        if ctx.author.id in config_forwarder.owners:
+            spamamt = int(input("Enter the amt of spam u want:"))
+            for x in range(0, spamamt):
+                time.sleep(1)
+                await user.send(message)
+                print("User " + author + " used the msg command")
         else:
             embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
             await ctx.send(embed=embed)
