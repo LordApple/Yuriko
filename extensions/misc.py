@@ -17,6 +17,10 @@ embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]
 class Misc:
     def __init__(self, bot,):
         self.bot = bot
+        self.ball = ["As I see it, yes", "It is certain", "It is decidedly so", "Most likely", "Outlook good",
+                    "Signs point to yes", "Without a doubt", "Yes", "Yes – definitely", "You may rely on it", "Reply hazy, try again",
+                    "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
+                    "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
     async def randomimageapi(self, ctx, url, endpoint):
         try:
@@ -25,11 +29,6 @@ class Misc:
             return await ctx.send("Couldn't find anything from the API")
 
         await ctx.send(r[endpoint])
-
-        self.ball = ["As I see it, yes", "It is certain", "It is decidedly so", "Most likely", "Outlook good",
-                    "Signs point to yes", "Without a doubt", "Yes", "Yes – definitely", "You may rely on it", "Reply hazy, try again",
-                    "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
-                    "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
     @commands.command()
     async def avatar(self, ctx, member: discord.Member = None):
