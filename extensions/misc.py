@@ -195,10 +195,10 @@ class Misc:
         """ Give someone a kiss OwO """
         if user is None:
             user = ctx.author.display_name
-            await ctx.send("Bruh, try to kiss yourself irl first.")
+            await ctx.send("Bruh, who are you trying to kiss?")
             return
         elif user is ctx.author:
-            await ctx.send("Bruh, try to kiss yourself irl first.")
+            await ctx.send("Sorry to see you alone ;-;")
             return
         else:
             author = user.display_name
@@ -207,24 +207,45 @@ class Misc:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
     
     @commands.command()
-    async def hug(self, ctx, user : discord.Member):
+    async def hug(self, ctx, user : discord.Member = None):
         """ Give someone a hug UwU """
+        if user is None:
+            await ctx.send("Bruh, who are you trying to hug?")
+            return
+        elif user is ctx.author:
+            embed = discord.Embed(color=0xFF0000,title="Sorry to see you alone...")
+            embed.set_image(url="https://readifgay.com/images/selfhug.gif")
+            await ctx.send(embed=embed)
+            return
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got a hug from " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/hug', 'url')
     
     @commands.command()
-    async def tickle(self, ctx, user : discord.Member):
+    async def tickle(self, ctx, user : discord.Member = None):
         """ Tickles someone :3"""
+        if user is None:
+            await ctx.send("Bruh, who are you trying to tickle")
+            return
+        elif user is ctx.author:
+            await ctx.send("So you can manage to tickle yourself huh")
+            return
+        author = user.displ
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " tickled " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/tickle', 'url')
 
     @commands.command()
-    async def pat(self, ctx, user : discord.Member):
+    async def pat(self, ctx, user : discord.Member = None):
         """ Pat someone UwU """
+        if user is None:
+            await ctx.send("Bruh, who are you trying to pat")
+            return
+        elif user is ctx.author:
+            await ctx.send("***Pats self***")
+            return
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got a pat from " + "{}".format(user)))
@@ -238,16 +259,30 @@ class Misc:
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/avatar', 'url')
 
     @commands.command()
-    async def cuddle(self, ctx, user : discord.Member):
+    async def cuddle(self, ctx, user : discord.Member = None):
         """ Cuddle with someone OwO """
+        if user is None:
+            await ctx.send("Bruh, who are you trying to cuddle with")
+            return
+        elif user is ctx.author:
+            embed = discord.Embed(color=0xFF0000 ,title="***Cuddles pillow***")
+            embed.set_image(url="https://readifgay.com/images/cuddelingpillow.png")
+            await ctx.send(embed=embed)
+            return
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " is cuddling with " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cuddle', 'url')
 
     @commands.command()
-    async def spank(self, ctx, user : discord.Member):
+    async def spank(self, ctx, user : discord.Member = None):
         """ Give someone a spank  """
+        if user is None:
+            await ctx.send("Bruh, who are you giving a beating")
+            return
+        elif user is ctx.author:
+            await ctx.send("woah, that's kinda weird not gonna lie.")
+            return
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got spanked by " + "{}".format(user)))
