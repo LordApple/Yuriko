@@ -207,7 +207,7 @@ class Misc:
     
     @commands.command()
     async def tickle(self, ctx, user : discord.Member):
-        """ Tickles someone """
+        """ Tickles someone :3"""
         author = user.display_name
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " tickled " + "{}".format(user)))
@@ -233,6 +233,13 @@ class Misc:
             user = ctx.author.display_name
             await ctx.send(italics("{}".format(author) + " Got a blowjob from " + "{}".format(user)))
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
+
+    @commands.command()
+    async def giveavatar(self, ctx):
+        """ Gives you a avatar to use """
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(user) + ", Here is your avatar"))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/avatar', 'url')
 
     @commands.command()
     async def cuddle(self, ctx, user : discord.Member):
