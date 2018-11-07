@@ -235,6 +235,18 @@ class Misc:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
 
     @commands.command()
+    async def nsfwavatar(self, ctx):
+        """ Gives you a NSFW avatar """
+        if ctx.channel.is_nsfw() != True:
+            embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            await ctx.send(embed=embed)
+            return
+        else:
+            user = ctx.author.display_name
+            await ctx.send(italics("{}".format(user) + ", Here is your avatarç"))
+            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_avatar', 'url')
+
+    @commands.command()
     async def giveavatar(self, ctx):
         """ Gives you a avatar to use """
         user = ctx.author.display_name
