@@ -144,7 +144,7 @@ class Misc:
 
     @commands.command()
     async def reverse(self, ctx, *, text: str):
-        """ !poow ,ffuts esreveR
+        """ Reverses everything you type.
         Everything you type after reverse will of course, be reversed
         """
         t_rev = text[::-1].replace("@", "@\u200B").replace("&", "&\u200B")
