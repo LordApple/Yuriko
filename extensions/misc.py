@@ -204,6 +204,46 @@ class Misc:
         user = ctx.author.display_name
         await ctx.send(italics("{}".format(author) + " got a hug from " + "{}".format(user)))
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/hug', 'url')
+    
+    @commands.command()
+    async def tickle(self, ctx, user : discord.Member):
+        """ Tickles someone """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " tickled " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/tickle', 'url')
+
+    @commands.command()
+    async def pat(self, ctx, user : discord.Member):
+        """ Pat someone UwU """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " got a pat from " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pat', 'url')
+
+    @commands.command()
+    async def blow(self, ctx, user : discord.Member):
+        """ Give someone a blow ( ͡° ͜ʖ ͡°) """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(user) + " Got a blowjob from " + "{}".format(author)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
+
+    @commands.command()
+    async def cuddle(self, ctx, user : discord.Member):
+        """ Cuddle with someone OwO """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " is cuddling with " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cuddle', 'url')
+
+    @commands.command()
+    async def spank(self, ctx, user : discord.Member):
+        """ Give someone a spank  """
+        author = user.display_name
+        user = ctx.author.display_name
+        await ctx.send(italics("{}".format(author) + " got spanked by " + "{}".format(user)))
+        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/spank', 'url')    
 
     @commands.command()
     async def neko(self, ctx):
