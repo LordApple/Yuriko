@@ -12,6 +12,8 @@ from random import choice
 from extensions.tools import default, config_forwarder, http, perms
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify
 
+embedcolors = [0x12a8a8, 0x2807ff]
+
 class Misc:
     def __init__(self, bot,):
         self.bot = bot
@@ -71,7 +73,7 @@ class Misc:
         """Guild Icon"""
         server = ctx.message.guild.name
         embed = discord.Embed()
-        embed=discord.Embed(color=0x3ef301, title="{}'s icon".format(server))
+        embed=discord.Embed(color=choice(embedcolors), title="{}'s icon".format(server))
         embed.set_image(url=ctx.message.guild.icon_url)
         await ctx.send(embed=embed)
         #await ctx.send(" {}".format(ctx.message.guild.icon_url))
