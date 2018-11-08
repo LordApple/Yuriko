@@ -4,8 +4,8 @@ import os
 import psutil
 import random
 import json
-from datetime import datetime
 
+from datetime import datetime
 from discord.ext import commands
 from random import randint
 from random import choice
@@ -13,6 +13,7 @@ from extensions.tools import default, config_forwarder, http, perms
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
 embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]
+insultlist = ["Your mom is big gay"]
 
 class Misc:
     def __init__(self, bot,):
@@ -62,21 +63,11 @@ class Misc:
             embed = discord.Embed(color=0x3ef301)
             embed.add_field(name="8ball response.", value="" + choice(self.ball) + "")
             await ctx.send(embed=embed)
-            #await ctx.send("`" + choice(self.ball) + "`")
         else:
             embederror = discord.Embed(color=0xff0022)
             embederror.add_field(name="That doesn't look like a question.", value="Question must end with a question mark.")
             await ctx.send(embed=embederror)
-            #await ctx.send("That doesn't look like a question.")
     
-    #@commands.command()
-    #async def guildcount(self, ctx):
-        #"""Bot Guild Count"""
-        #servers = bold (len((self.bot.guilds)))
-        #await ctx.send("I'm in " + servers + " Guilds!")
-        #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))"""
-
-
     @commands.command()
     @commands.guild_only()
     async def guildicon(self, ctx):
@@ -85,7 +76,11 @@ class Misc:
         embed=discord.Embed(color=choice(embedcolors), title="{}'s icon".format(server))
         embed.set_image(url=ctx.message.guild.icon_url)
         await ctx.send(embed=embed)
-        #await ctx.send(" {}".format(ctx.message.guild.icon_url))
+
+    @commands.command()
+    async def insult(self, ctx, *, user: discord.Member):
+        """Insults a user for you"""
+        await ctx.send("{},".format(user.display_name) + " {}".format(choice(insultlist)))
 
     #my old hug code.
     '''@commands.command(no_pm=True)
@@ -130,7 +125,10 @@ class Misc:
 
         for user in users:
             random.seed(user.id)
-            dongs[user] = "8{}D".format("=" * random.randint(0, 30))
+            if user.id == 381506124509347840: #because i can ok? also, this is not my id. its the bots
+                dongs[user] = "8{}D".format("=" * 50)
+            else:
+                dongs[user] = "8{}D".format("=" * random.randint(0, 30))
 
         random.setstate(state)
         dongs = sorted(dongs.items(), key=lambda x: x[1])

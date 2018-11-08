@@ -33,7 +33,7 @@ class Admin:
         try:
             therole = discord.Object(id=message[0])
         except IndexError:
-            return await ctx.send("Are you sure you've made a role called **Muted**? Remember that it's case sensetive too...")
+            return await ctx.send("Are you sure you've made a role called **Muted**?")
 
         try:
             await member.add_roles(therole, reason=default.responsible(ctx.author, reason))
