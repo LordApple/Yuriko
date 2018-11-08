@@ -10,19 +10,19 @@ class Admin:
         self.bot = bot
 
     @commands.command()
-    @perms.has_permissions(kick_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.guild_only()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
         await ctx.guild.kick(user)
 
     @commands.command()
-    @perms.has_permissions(ban_members=True)
+    @commands.has_permissions(ban_members=True)
     @commands.guild_only()
     async def ban(self, ctx, user: discord.Member, *, reason: str = None):
         await ctx.guild.ban(user)
 
     @commands.command()
-    @perms.has_permissions(manage_roles=True)
+    @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def mute(self, ctx, member: discord.Member, *, reason: str = None):
         """ Mutes a user from the current server. """
@@ -42,7 +42,7 @@ class Admin:
             await ctx.send(e)
 
     @commands.command()
-    @perms.has_permissions(manage_roles=True)
+    @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def unmute(self, ctx, member: discord.Member, *, reason: str = None):
         """ Unmutes a user from the current server. """
