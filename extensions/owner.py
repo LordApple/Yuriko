@@ -95,5 +95,22 @@ class Owner:
             else:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
+    @commands.command()
+    async def guilds(self, ctx):
+        """Lists all bot servers"""
+        author = ctx.message.author.display_name
+        if ctx.author.id in config_forwarder.owners:
+            msg = ''
+            for server in self.bot.guilds:
+                msg = msg + '\n' + str(server)
+            msg = msg + '\n'
+            embed = discord.Embed(color=0x3ef301,title="Im in {}".format(len(self.bot.guilds)) + " guilds")
+            embed.add_field(name="Server list", value=msg)
+            await ctx.send(embed=embed)
+        else:
+            embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
+            await ctx.send(embed=embed)
+            print("User " + author + " tried to use the guilds command.")
+
 def setup(bot):
     bot.add_cog(Owner(bot))

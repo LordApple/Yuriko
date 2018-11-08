@@ -69,23 +69,12 @@ class Misc:
             await ctx.send(embed=embederror)
             #await ctx.send("That doesn't look like a question.")
     
-    @commands.command()
-    async def guildcount(self, ctx):
-        """Bot Guild Count"""
-        servers = bold (len((self.bot.guilds)))
-        await ctx.send("I'm in " + servers + " Guilds!")
-        #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))
-
-    @commands.command()
-    async def serverlist(self, ctx):
-        """Lists all bot servers"""
-        msg = 'servers'
-        for server in self.bot.guilds:
-            msg = msg + '\n' + str(server)
-        msg = msg + '\n'
-        embed = discord.Embed(color=0x3ef301,title="Im in {}".format(len(self.bot.guilds)) + " guilds")
-        embed.add_field(name="Server list", value=msg)
-        await ctx.send(embed=embed)
+    #@commands.command()
+    #async def guildcount(self, ctx):
+        #"""Bot Guild Count"""
+        #servers = bold (len((self.bot.guilds)))
+        #await ctx.send("I'm in " + servers + " Guilds!")
+        #await ctx.send(" ** I'm in {} Guilds!**".format(len(self.bot.guilds)))"""
 
 
     @commands.command()
