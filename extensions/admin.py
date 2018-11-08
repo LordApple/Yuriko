@@ -62,7 +62,7 @@ class Admin:
             await ctx.send(e)
 
     @commands.command(aliases=["prune"])
-    @perms.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     @commands.guild_only()
     async def purge(self, ctx, amount: int):
         deleted = await ctx.channel.purge(limit=amount)
