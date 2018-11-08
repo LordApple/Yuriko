@@ -146,7 +146,7 @@ class Misc:
         """
         t_rev = text[::-1].replace("@", "@\u200B").replace("&", "&\u200B")
         await ctx.send(f"🔁 {t_rev}")
-
+        
     @commands.group()
     @commands.guild_only()
     async def server(self, ctx):
@@ -290,10 +290,21 @@ class Misc:
         """ Posts a picture of a neko """
         await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/neko', 'url')
 
+    async def catapi(self, ctx, url, endpoint):
+        try:
+            r = await http.get(url, res_method="json", no_cache=True)
+        except json.JSONDecodeError:
+            return await ctx.send("Couldn't find anything from the API")
+
+        url = (r[endpoint])
+        embed = discord.Embed(title="cat")
+        embed.set_image(url=url)
+        await ctx.send(embed=embed)
+
     @commands.command()
     async def cat(self, ctx):
         """ Posts a random cat """
-        await self.randomimageapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
+        await self.catapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
 
     @commands.command()
     async def dog(self, ctx):
