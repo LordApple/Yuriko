@@ -2,10 +2,12 @@ import discord
 import json
 import time
 
+from random import choice
 from extensions.tools import http
 from discord.ext import commands
 from extensions.tools.chat_formatting import italics
 
+embedcolors = [0x12a8a8, 0x2807ff, 0x12a873, 0x00FF54, 0x7EFF00, 0xFF6000, 0xCC00FF, 0xFF007E]
 
 class nsfw:
     def __init__(self, bot):
@@ -18,7 +20,7 @@ class nsfw:
             return await ctx.send("Couldn't find anything from the API")
 
         url = (r[endpoint])
-        e = discord.Embed(color=0xff0022)
+        e = discord.Embed(color=choice(embedcolors))
         e.set_image(url=url)
         await ctx.send(embed=e)
 
@@ -32,7 +34,7 @@ class nsfw:
             await ctx.send("woah, that's kinda weird not gonna lie.")
             return
         if ctx.channel.is_nsfw() != True:
-            embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            embed=discord.Embed(color=random.choice(embedcolors), title="This command can only be used in NSFW flagged channels.")
             await ctx.send(embed=embed)
             return
         else:   
