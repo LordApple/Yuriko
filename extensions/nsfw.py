@@ -34,7 +34,7 @@ class nsfw:
             await ctx.send("woah, that's kinda weird not gonna lie.")
             return
         if ctx.channel.is_nsfw() != True:
-            embed=discord.Embed(color=random.choice(embedcolors), title="This command can only be used in NSFW flagged channels.")
+            embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
             await ctx.send(embed=embed)
             return
         else:   
