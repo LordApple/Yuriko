@@ -17,7 +17,10 @@ class nsfw:
         except json.JSONDecodeError:
             return await ctx.send("Couldn't find anything from the API")
 
-        await ctx.send(r[endpoint])
+        url = (r[endpoint])
+        e = discord.Embed(color=0xff0022)
+        e.set_image(url=url)
+        await ctx.send(embed=e)
 
     @commands.command()
     async def spank(self, ctx, user : discord.Member = None):
@@ -62,7 +65,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
@@ -80,7 +86,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
@@ -98,7 +107,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
@@ -116,7 +128,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
@@ -134,7 +149,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
@@ -152,7 +170,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
@@ -188,7 +209,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
@@ -206,7 +230,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
@@ -224,7 +251,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
@@ -242,7 +272,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')
