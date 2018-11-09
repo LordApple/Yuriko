@@ -181,7 +181,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
-    async def futa(self, ctx, bombamount=0):
+    async def anal(self, ctx, bombamount=0):
         """ Posts a random anal gif 
         you can use *futa amount for more
         """
