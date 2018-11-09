@@ -20,6 +20,21 @@ class nsfw:
         await ctx.send(r[endpoint])
 
     @commands.command()
+    async def spank(self, ctx, user : discord.Member = None):
+        """ Give someone a spank  """
+        if user is None:
+            await ctx.send("Bruh, who are you giving a beating")
+            return
+        elif user is ctx.author:
+            await ctx.send("woah, that's kinda weird not gonna lie.")
+            return
+        author = user.display_name
+        user = ctx.author.display_name
+        if ctx.channel.is_nsfw() != True:
+            await ctx.send(italics("{}".format(author) + " got spanked by " + "{}".format(user)))
+            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/spank', 'url')    
+
+    @commands.command()
     async def nsfwavatar(self, ctx):
         """ Gives you a NSFW avatar """
         if ctx.channel.is_nsfw() != True:
