@@ -32,6 +32,7 @@ class Misc:
         await ctx.send(r[endpoint])
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def avatar(self, ctx, member: discord.Member = None):
         """User Avatar"""
         if member is None:
@@ -81,25 +82,6 @@ class Misc:
     async def insult(self, ctx, *, user: discord.Member):
         """Insults a user for you"""
         await ctx.send("{},".format(user.display_name) + " {}".format(choice(insultlist)))
-
-    #my old hug code.
-    '''@commands.command(no_pm=True)
-    async def hug(self, ctx, user : discord.Member, intensity : int=1):
-        """Because everyone likes hugs
-
-        Up to 10 intensity levels."""
-        name = italics(user.display_name)
-        if intensity <= 0:
-            msg = "(っ˘̩╭╮˘̩)っ" + name
-        elif intensity <= 3:
-            msg = "(っ´▽｀)っ" + name
-        elif intensity <= 6:
-            msg = "╰(*´︶`*)╯" + name
-        elif intensity <= 9:
-            msg = "(つ≧▽≦)つ" + name
-        elif intensity >= 10:
-            msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
-        await ctx.send(msg)'''
 
     @commands.command()
     async def ping(self,ctx):
@@ -297,40 +279,5 @@ class Misc:
         """ Posts a random dog """
         await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
     
-    @commands.command()
-    async def urban(self, ctx, *, search: str):
-        """ Find the 'best' definition to your words """
-        if not perms.can_embed(ctx):
-            return await ctx.send("I cannot send embeds here ;-;")
-
-        url = await http.get(f'http://api.urbandictionary.com/v0/define?term={search}', res_method="json")
-
-        if url is None:
-            return await ctx.send("I think the API broke...")
-
-        count = len(url['list'])
-        if count == 0:
-            return await ctx.send("Couldn't find your search in the dictionary...")
-        result = url['list'][random.randint(0, count - 1)]
-
-        definition = result['definition']
-        if len(definition) >= 1000:
-                definition = definition[:1000]
-                definition = definition.rsplit(' ', 1)[0]
-                definition += '...'
-
-        embed = discord.Embed(colour=0xC29FAF, description=f"**{result['word']}**\n*by: {result['author']}*")
-        embed.add_field(name='Definition', value=definition, inline=False)
-        embed.add_field(name='Example', value=result['example'], inline=False)
-        embed.set_footer(text=f"👍 {result['thumbs_up']} | 👎 {result['thumbs_down']}")
-
-        try:
-            await ctx.send(embed=embed)
-        except discord.Forbidden:
-            await ctx.send("I found something, but have no access to post it... [Embed permissions]")
-
-
-
-
 def setup(bot):
     bot.add_cog(Misc(bot))

@@ -55,7 +55,8 @@ class nsfw:
 
 
     @commands.command()
-    async def blowjob(self, ctx, bombamount=0):
+    @commands.cooldown(1, 50, commands.BucketType.guild)
+    async def blowjob(self, ctx, bombamount=0, **kwargs):
         """ Posts a random blowjob gif 
         you can use *blowjob amount for more
         """
@@ -64,11 +65,11 @@ class nsfw:
             await ctx.send(embed=embed)
             return
         elif bombamount == 0:
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+                await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
@@ -76,6 +77,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def kitsune(self, ctx, bombamount=0):
         """ Posts a random kitsune pictures 
         you can use *kitsune amount for more
@@ -86,10 +88,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
@@ -97,6 +99,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def pussy(self, ctx, bombamount=0):
         """ Posts a random anime pussy gif 
         you can use *pussy amount for more
@@ -107,10 +110,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
@@ -118,6 +121,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def kuni(self, ctx, bombamount=0):
         """ Posts a random kuni gif 
         you can use *kuni amount for more
@@ -128,10 +132,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
@@ -139,6 +143,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def trap(self, ctx, bombamount=0):
         """ Posts a random trap picture
         you can use *trap amount for more
@@ -149,10 +154,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
@@ -160,6 +165,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def futa(self, ctx, bombamount=0):
         """ Posts a random futa picture 
         you can use *futa amount for more
@@ -170,10 +176,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
@@ -181,6 +187,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def anal(self, ctx, bombamount=0):
         """ Posts a random anal gif 
         you can use *futa amount for more
@@ -191,10 +198,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
@@ -202,6 +209,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def cumgif(self, ctx, bombamount=0):
         """ Posts a random gif of a hentai girl covered in cum
         you can use *cumgif amount for more
@@ -212,10 +220,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
@@ -223,6 +231,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def cum(self, ctx, bombamount=0):
         """ Posts a random hentai gif covered in cum
         you can use *cum amount for more
@@ -233,10 +242,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
@@ -244,6 +253,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def yuri(self, ctx, bombamount=0):
         """ Posts a random yuri picture
         you can use *yuri amount for more
@@ -254,10 +264,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
@@ -265,6 +275,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def hentai(self, ctx, bombamount=0):
         """ Posts a random hentai gif
         you can use *hentai amount for more
@@ -275,10 +286,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
@@ -286,6 +297,7 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    @commands.cooldown(1, 50, commands.BucketType.guild)
     async def nekogif(self, ctx, bombamount=0):
         """ Posts a random neko gif
         you can use *nekogif amount for more
@@ -296,10 +308,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')
-        elif bombamount > 100:
-            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+        elif bombamount > 50:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 50")
             await ctx.send(embed=embed)
-        elif bombamount <= 100:
+        elif bombamount <= 50:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')

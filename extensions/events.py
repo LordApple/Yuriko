@@ -2,14 +2,15 @@ import traceback
 import discord
 import aiohttp
 import re
-from datetime import timedelta
 import traceback
 import os
-from random import choice, randint
 import random
 import datetime
 import sys
 import platform
+
+from random import choice, randint
+from datetime import timedelta
 from discord.ext.commands import errors
 
 games = ["How to commit die 101.", "🤔🤔🤔🤔🤔🤔", "nhentai.net", "☭ The Communist Manifesto ☭"]
@@ -30,7 +31,6 @@ class Events:
         print('--------')
         print('Created by Apple#1337')
 
-        #print(f'Logged in as {self.bot.user.name}')
         self.bot.invite_url = discord.utils.oauth_url(self.bot.user.id)
         game = discord.Streaming(name=random.choice(games), url="https://www.twitch.tv/twitchbot_discord/")
         await self.bot.change_presence(status=discord.Status.dnd, activity=game)

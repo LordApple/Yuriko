@@ -1,10 +1,11 @@
-from discord.ext import commands
 import asyncio
 import os
 import datetime
 import time
 import socket
 import psutil
+
+from discord.ext import commands
 from socket import AF_INET, SOCK_STREAM, SOCK_DGRAM
 
 try:
