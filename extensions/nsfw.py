@@ -181,6 +181,27 @@ class nsfw:
                 time.sleep(1)
 
     @commands.command()
+    async def futa(self, ctx, bombamount=0):
+        """ Posts a random anal gif 
+        you can use *futa amount for more
+        """
+        if ctx.channel.is_nsfw() != True:
+            embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            await ctx.send(embed=embed)
+            return
+        elif bombamount == 0:
+            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
+            messages = 0
+            while messages < int(bombamount):
+                await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
+                messages = messages + 1
+                time.sleep(1)
+
+    @commands.command()
     async def cumgif(self, ctx, bombamount=0):
         """ Posts a random gif of a hentai girl covered in cum
         you can use *cumgif amount for more
