@@ -28,9 +28,13 @@ class nsfw:
         elif user is ctx.author:
             await ctx.send("woah, that's kinda weird not gonna lie.")
             return
-        author = user.display_name
-        user = ctx.author.display_name
         if ctx.channel.is_nsfw() != True:
+            embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            ctx.send(embed=embed)
+            return
+        else:   
+            author = user.display_name
+            user = ctx.author.display_name
             await ctx.send(italics("{}".format(author) + " got spanked by " + "{}".format(user)))
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/spank', 'url')    
 
