@@ -212,7 +212,10 @@ class nsfw:
             return
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
-        else:
+        elif bombamount > 100:
+            embed=discord.Embed(color=0xff0022,title="Max bomblimit is 100")
+            await ctx.send(embed=embed)
+        elif bombamount <= 100:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
