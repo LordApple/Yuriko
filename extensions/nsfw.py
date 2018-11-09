@@ -30,7 +30,7 @@ class nsfw:
             return
         if ctx.channel.is_nsfw() != True:
             embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            ctx.send(embed=embed)
+            await ctx.send(embed=embed)
             return
         else:   
             author = user.display_name
