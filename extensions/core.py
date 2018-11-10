@@ -8,7 +8,8 @@ class Core:
 
     @commands.command()
     async def invite(self, ctx):
-        await ctx.send("Invite link: https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8".format(self.bot.user.id))
+        e = discord.Embed(title="Click to invite.", url="https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8".format(self.bot.user.id))
+        await ctx.send(embed=e)
 
     @commands.command()
     @commands.is_owner()
