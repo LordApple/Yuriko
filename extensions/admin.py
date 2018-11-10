@@ -61,6 +61,18 @@ class Admin:
         except Exception as e:
             await ctx.send(e)
 
+    @commands.command()
+    @commands.has_permissions(manage_nicknames=True)
+    @commands.guild_only()
+    async def setnick(self, ctx, member : discord.Member, *, name):
+            try:
+                await member.edit(nick=name)
+            except:
+                await ctx.send("Failed to change nickname")
+            else:
+                await ctx.send("Successfuly changed nickname to {}".format(name))
+
+
     @commands.command(aliases=["prune"])
     @commands.has_permissions(manage_messages=True)
     @commands.guild_only()
