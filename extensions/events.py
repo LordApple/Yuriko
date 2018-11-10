@@ -32,7 +32,7 @@ class Events:
         print('Created by Apple#1337')
 
         self.bot.invite_url = discord.utils.oauth_url(self.bot.user.id)
-        game = discord.Streaming(name=random.choice(games), url="https://www.twitch.tv/twitchbot_discord/")
+        game = discord.Activity(type=1,name=random.choice(games),url="https://www.twitch.tv/twitchbot_discord/")
         await self.bot.change_presence(status=discord.Status.dnd, activity=game)
     
 

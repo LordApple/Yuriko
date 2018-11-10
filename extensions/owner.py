@@ -57,6 +57,7 @@ class Owner:
         await ctx.message.delete()
         await ctx.send(message)
 
+    """
     @commands.command()
     @commands.is_owner()
     async def setgame(self, ctx, *, game):
@@ -69,19 +70,18 @@ class Owner:
                 await ctx.send("Failed to change game")
             else:
                 await ctx.send("Successfuly changed game to {}".format(game))
+                """
     
     @commands.command()
     @commands.is_owner()
-    async def setstream(self, ctx, *, game):
-        game = game.strip()
-        if game != "":
+    async def setgame(self, ctx, gtype, *, game):
             try:
-                game = discord.Streaming(name=game, url="https://www.twitch.tv/twitchbot_discord/")
+                game = discord.Activity(type=gtype,name=game, url="https://www.twitch.tv/twitchbot_discord/")
                 await self.bot.change_presence(status=discord.Status.dnd, activity=game)
             except:
                 await ctx.send("Failed to change game")
             else:
-                await ctx.send("Successfuly changed game to {}".format(game))
+                await ctx.send("Done")
 
     @commands.command()
     @commands.is_owner()

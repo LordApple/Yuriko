@@ -62,7 +62,7 @@ class Misc:
         """
         if question.endswith("?") and question != "?":
             embed = discord.Embed(color=0x3ef301)
-            embed.add_field(name="8ball response.", value="" + choice(self.ball) + "")
+            embed.add_field(name="8ball response.", value=choice(self.ball))
             await ctx.send(embed=embed)
         else:
             embederror = discord.Embed(color=0xff0022)
