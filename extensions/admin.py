@@ -13,13 +13,23 @@ class Admin:
     @commands.has_permissions(kick_members=True)
     @commands.guild_only()
     async def kick(self, ctx, user: discord.Member, *, reason: str = None):
-        await ctx.guild.kick(user)
+        if user == ctx.author:
+            e=discord.Embed(title="Self harm is bad")
+            await ctx.send(embed=e)
+            return
+        else:
+            await ctx.guild.kick(user)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
     @commands.guild_only()
     async def ban(self, ctx, user: discord.Member, *, reason: str = None):
-        await ctx.guild.ban(user)
+        if user == ctx.author:
+            e=discord.Embed(title="Self harm is bad")
+            await ctx.send(embed=e)
+            return
+        else:
+            await ctx.guild.ban(user)
 
     @commands.command()
     @commands.has_permissions(manage_roles=True)
@@ -71,6 +81,15 @@ class Admin:
                 await ctx.send("Failed to change nickname")
             else:
                 await ctx.send("Successfuly changed nickname to {}".format(name))
+
+    @commands.command()
+    @commands.has_permissions(manage_guild=True)
+    async def setguildicon(self, ctx, url):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as r:
+                data = await r.read()
+        await ctx.guild.edit(icon=data)
+        await ctx.send("Icon changed")
 
 
     @commands.command(aliases=["prune"])
