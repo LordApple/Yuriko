@@ -60,6 +60,5 @@ class Events:
         else:
             print(exception)
 
-
 def setup(bot):
     bot.add_cog(Events(bot))

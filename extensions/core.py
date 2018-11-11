@@ -25,6 +25,7 @@ class Core:
             await m.edit(content=f'Error while loading {name}\n`{stack_line}`')
 
     @commands.command()
+    @commands.is_owner()
     async def unload(self, ctx, name: str):
         """Unloads an extension in the bot"""
         m = await ctx.send(f'unloading {name}')
@@ -35,6 +36,7 @@ class Core:
             return
 
     @commands.command()
+    @commands.is_owner()
     async def load(self, ctx, name: str):
         """Loads an extension in the bot"""
         m = await ctx.send(f"loading {name}")

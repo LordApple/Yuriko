@@ -279,6 +279,6 @@ class Misc:
     async def dog(self, ctx):
         """ Posts a random dog """
         await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
-    
+
 def setup(bot):
     bot.add_cog(Misc(bot))
