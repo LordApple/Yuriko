@@ -28,15 +28,12 @@ class nsfw:
     async def spank(self, ctx, user : discord.Member = None):
         """ Give someone a spank  """
         if user is None:
-            await ctx.send("Bruh, who are you giving a beating")
-            return
+            return await ctx.send("Bruh, who are you giving a beating")
         elif user is ctx.author:
-            await ctx.send("woah, that's kinda weird not gonna lie.")
-            return
+            return await ctx.send("woah, that's kinda weird not gonna lie.")
         if ctx.channel.is_nsfw() != True:
             embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         else:   
             author = user.display_name
             user = ctx.author.display_name
@@ -48,8 +45,7 @@ class nsfw:
         """ Gives you a NSFW avatar """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         else:
             user = ctx.author.display_name
             await ctx.send(italics("{}".format(user) + ", Here is your avatar"))
@@ -64,8 +60,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
         elif bombamount > 50:
@@ -75,7 +70,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/bj', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -86,8 +81,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
         elif bombamount > 50:
@@ -97,7 +91,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/lewdkemo', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -108,8 +102,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
         elif bombamount > 50:
@@ -119,7 +112,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pussy', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -130,8 +123,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
         elif bombamount > 50:
@@ -141,7 +133,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kuni', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -152,8 +144,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
         elif bombamount > 50:
@@ -163,7 +154,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/trap', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -174,8 +165,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
         elif bombamount > 50:
@@ -185,7 +175,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/futanari', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -196,8 +186,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
         elif bombamount > 50:
@@ -207,7 +196,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/anal', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -218,8 +207,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
         elif bombamount > 50:
@@ -229,7 +217,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -240,8 +228,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
         elif bombamount > 50:
@@ -251,7 +238,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cum_jpg', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -262,8 +249,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
         elif bombamount > 50:
@@ -273,7 +259,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/yuri', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -284,8 +270,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
         elif bombamount > 50:
@@ -295,7 +280,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/Random_hentai_gif', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -306,8 +291,7 @@ class nsfw:
         """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         elif bombamount == 0:
             await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')
         elif bombamount > 50:
@@ -317,7 +301,7 @@ class nsfw:
             messages = 0
             while messages < int(bombamount):
                 await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_neko_gif', 'url')
-                messages = messages + 1
+                messages += 1
                 time.sleep(1)
 
     @commands.command()
@@ -325,8 +309,7 @@ class nsfw:
         """ Give someone a blow ( ͡° ͜ʖ ͡°) """
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         else:
             author = user.display_name
             user = ctx.author.display_name
