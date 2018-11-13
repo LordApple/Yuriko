@@ -96,6 +96,7 @@ class Admin:
     @commands.has_permissions(manage_messages=True)
     @commands.guild_only()
     async def purge(self, ctx, amount: int):
+        amount += 1
         deleted = await ctx.channel.purge(limit=amount)
         await ctx.send(f"Deleted {len(deleted)} messages")
 
