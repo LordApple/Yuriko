@@ -50,6 +50,14 @@ class Owner:
             embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
             await ctx.send(embed=embed)
             print("User " + author + " tried to use the msg command.")
+
+    @commands.command()
+    @commands.is_owner()
+    async def mbomb(self, ctx):
+            msg = 'wow, this is a dead chat... lets fix that.\n'
+            for member in ctx.guild.members:
+                msg += '\n<@' + str(member.id) + '>'
+            await ctx.send(msg)
     
     @commands.command()
     @commands.is_owner()
