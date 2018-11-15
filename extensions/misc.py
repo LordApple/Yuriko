@@ -9,7 +9,7 @@ from datetime import datetime
 from discord.ext import commands
 from random import randint
 from random import choice
-from extensions.tools import default, config_forwarder, http, perms
+from extensions.tools import default, config_forwarder, http
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
 embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]

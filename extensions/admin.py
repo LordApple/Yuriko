@@ -1,7 +1,7 @@
 import discord
 import aiohttp
 
-from extensions.tools import perms, default
+from extensions.tools import default
 from discord.ext import commands
 
 
