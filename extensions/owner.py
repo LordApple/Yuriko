@@ -104,9 +104,16 @@ class Owner:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
     @commands.command()
+    @commands.has_permissions(manage_server=True)
+    async def rall(self,ctx,*,name):
+        for member in ctx.guild.members:
+            if member.top_role.position < ctx.guild.me.top_role.position:
+                await member.edit(nick=name)
+                print(f'Member {member} has been renamed to {name}')
+
+    @commands.command()
     async def guilds(self, ctx):
         """Lists all bot servers"""
-        author = ctx.message.author.display_name
         if ctx.author.id in config_forwarder.owners:
             msg = ''
             for server in self.bot.guilds:
