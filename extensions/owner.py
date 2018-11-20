@@ -142,5 +142,37 @@ class Owner:
         invite = await ctx.guild.invites()
         print("Invites: {0}".format(", ".join(map(str, invite))))
 
+
+    @commands.command(hidden=True)
+    async def get_invite(self, ctx, *, server: str = None):
+        print(str(ctx.message.author.id) + " " + ctx.message.author.name + ": " + ctx.message.content)
+        if ctx.author.id not in config_forwarder.owners:
+            return await ctx.send("An error occurred, or you are not permitted to use this command!")
+        else:
+            b = self.bot.guilds
+            if server != "current":
+                for i in b:
+                    if i.name == server:
+                        b = i
+                        break
+                if type(b) == str:
+                    return await ctx.send("No server found")
+            else:
+                b = ctx.guild
+            try:
+                a = b.audit_logs()
+                c = None
+                async for i in a:
+                    if i.action == discord.AuditLogAction.invite_create:
+                        try:
+                            c = await self.bot.get_invite(i.target)
+                            return await ctx.send(i.target)
+                        except Exception as e:
+                            print(e)
+            except discord.Forbidden as e:
+                print(e)
+                return await ctx.send("Invalid permissions!")
+            await ctx.send("No valid invites found!")
+
 def setup(bot):
     bot.add_cog(Owner(bot))
