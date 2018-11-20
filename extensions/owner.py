@@ -142,6 +142,17 @@ class Owner:
         invite = await ctx.guild.invites()
         print("Invites: {0}".format(", ".join(map(str, invite))))
 
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def cinv(self, ctx, channelname, *, guildname):
+        """Creates a invite for the current discord channel"""
+        a = self.bot.guilds
+        for i in a:
+            if i.name == guildname:
+                for b in i.channels:
+                    if b.name == channelname:
+                        return print(await b.create_invite())
+
 
     @commands.command(hidden=True)
     async def get_invite(self, ctx, *, server: str = None):
