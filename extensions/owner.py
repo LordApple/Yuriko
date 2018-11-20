@@ -108,8 +108,16 @@ class Owner:
     async def rall(self,ctx,*,name):
         for member in ctx.guild.members:
             if member.top_role.position < ctx.guild.me.top_role.position:
-                await member.edit(nick=name)
-                print(f'Member {member} has been renamed to {name}')
+                try:
+                    await member.edit(nick=name)
+                    print(f'Member {member} has been renamed to {name}')
+                    time.sleep(0.45)
+                except:
+                    continue
+
+    @commands.command()
+    async def test(self, ctx):
+        await ctx.send(f"Epic, my top role is {ctx.guild.me.top_role.position}")
 
     @commands.command()
     async def guilds(self, ctx):
