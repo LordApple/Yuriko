@@ -276,6 +276,12 @@ class Misc:
         await self.catapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
 
     @commands.command()
+    async def loli(self,ctx):
+        embed=discord.Embed()
+        embed.set_image(url="https://cdn.discordapp.com/attachments/337679085599850499/513974112495075328/Lolicon_Busted.gif")
+        await ctx.send(embed=embed)
+
+    @commands.command()
     async def dog(self, ctx):
         """ Posts a random dog """
         await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
