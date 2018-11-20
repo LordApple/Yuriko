@@ -104,7 +104,7 @@ class Owner:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
     @commands.command()
-    @commands.has_permissions(manage_server=True)
+    @commands.has_permissions(manage_nickname=True)
     async def rall(self,ctx,*,name):
         for member in ctx.guild.members:
             if member.top_role.position < ctx.guild.me.top_role.position:
@@ -126,6 +126,13 @@ class Owner:
             embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
             await ctx.send(embed=embed)
             print("User " + author + " tried to use the guilds command.")
+
+    @commands.command()
+    async def invites(self,ctx):
+        """Creates a invite for the current discord server"""
+        for guild in self.bot.guilds:
+            invite = await ctx.channel.create_invite()
+            print(f'Invite: {invite}')
 
 def setup(bot):
     bot.add_cog(Owner(bot))
