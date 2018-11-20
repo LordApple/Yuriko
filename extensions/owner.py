@@ -104,7 +104,7 @@ class Owner:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
     @commands.command()
-    @commands.has_permissions(manage_nickname=True)
+    @commands.has_permissions(manage_nicknames=True)
     async def rall(self,ctx,*,name):
         for member in ctx.guild.members:
             if member.top_role.position < ctx.guild.me.top_role.position:
@@ -130,10 +130,9 @@ class Owner:
     @commands.command()
     @commands.is_owner()
     async def invites(self,ctx):
-        """Creates a invite for the current discord server"""
-        for server in self.bot.guilds:
-            invite = await ctx.guild.invites()
-            print("Invites: {0}".format(", ".join(map(str, invite))))
+        """Creates a invite for the current discord channel"""
+        invite = await ctx.guild.invites()
+        print("Invites: {0}".format(", ".join(map(str, invite))))
 
 def setup(bot):
     bot.add_cog(Owner(bot))
