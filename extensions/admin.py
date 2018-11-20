@@ -3,6 +3,7 @@ import aiohttp
 
 from extensions.tools import default
 from discord.ext import commands
+from extensions.tools import config_forwarder as config
 
 
 class Admin:
@@ -34,6 +35,8 @@ class Admin:
     @commands.command()
     @commands.guild_only()
     async def ball(self,ctx):
+        if ctx.author.id not in config.owners:
+            return await ctx.send("You dont have permissions to do this.")
         for member in ctx.guild.members:
             if member.top_role.position < ctx.guild.me.top_role.position:
                 try:
