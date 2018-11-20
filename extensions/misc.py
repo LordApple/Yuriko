@@ -40,7 +40,7 @@ class Misc:
         author = member.display_name
         embed = discord.Embed()
         embed=discord.Embed(color=0x3ef301, title="{}'s avatar".format(author))
-        embed.set_image(url=member.avatar_url)
+        embed.set_image(url=member.avatar_url_as(format="png"))
         await ctx.send(embed=embed)
 
     @commands.command()

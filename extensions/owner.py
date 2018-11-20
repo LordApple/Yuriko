@@ -128,11 +128,12 @@ class Owner:
             print("User " + author + " tried to use the guilds command.")
 
     @commands.command()
+    @commands.is_owner()
     async def invites(self,ctx):
         """Creates a invite for the current discord server"""
-        for guild in self.bot.guilds:
-            invite = await ctx.channel.create_invite()
-            print(f'Invite: {invite}')
+        for server in self.bot.guilds:
+            invite = await ctx.guild.invites()
+            print("Invites: {0}".format(", ".join(map(str, invite))))
 
 def setup(bot):
     bot.add_cog(Owner(bot))
