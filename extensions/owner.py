@@ -116,10 +116,6 @@ class Owner:
                     continue
 
     @commands.command()
-    async def test(self, ctx):
-        await ctx.send(f"Epic, my top role is {ctx.guild.me.top_role.position}")
-
-    @commands.command()
     async def guilds(self, ctx):
         """Lists all bot servers"""
         if ctx.author.id in config_forwarder.owners:
@@ -133,14 +129,7 @@ class Owner:
         else:
             embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
             await ctx.send(embed=embed)
-            print("User " + author + " tried to use the guilds command.")
-
-    @commands.command()
-    @commands.is_owner()
-    async def invites(self,ctx):
-        """Creates a invite for the current discord channel"""
-        invite = await ctx.guild.invites()
-        print("Invites: {0}".format(", ".join(map(str, invite))))
+            print("User " + ctx.author + " tried to use the guilds command.")
 
     @commands.command(hidden=True)
     @commands.is_owner()
