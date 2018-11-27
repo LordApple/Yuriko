@@ -1,6 +1,7 @@
 import discord
 import json
 import time
+import aiohttp
 
 from random import choice
 from extensions.tools import http
@@ -34,11 +35,15 @@ class nsfw:
         if ctx.channel.is_nsfw() != True:
             embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
             return await ctx.send(embed=embed)
-        else:   
-            author = user.display_name
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(author) + " got spanked by " + "{}".format(user)))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/spank', 'url')    
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/spank') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{user} got spanked by {author}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)  
 
     @commands.command()
     async def nsfwavatar(self, ctx):
@@ -46,10 +51,14 @@ class nsfw:
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
             return await ctx.send(embed=embed)
-        else:
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(user) + ", Here is your avatar"))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/nsfw_avatar', 'url')
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/nsfw_avatar') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{author}, Here is your avatar"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
 
     @commands.command()
@@ -310,11 +319,15 @@ class nsfw:
         if ctx.channel.is_nsfw() != True:
             embed = discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
             return await ctx.send(embed=embed)
-        else:
-            author = user.display_name
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(author) + " Got a blowjob from " + "{}".format(user)))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/blowjob', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/blowjob') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{user} Got a blowjob from {author}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(nsfw(bot))

@@ -13,7 +13,7 @@ from random import choice
 from extensions.tools import default, config_forwarder, http
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
-embedcolors = [0x12a8a8, 0x2807ff, 0x12a873]
+embedcolors = [0x12a8a8, 0x2807ff, 0x12a873, 0x00FF54, 0x7EFF00, 0xFF6000, 0xCC00FF, 0xFF007E]
 insultlist = ["Your mom is big gay"]
 
 class Misc:
