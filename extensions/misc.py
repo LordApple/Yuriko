@@ -4,6 +4,7 @@ import os
 import psutil
 import random
 import json
+import aiohttp
 
 from datetime import datetime
 from discord.ext import commands
@@ -181,11 +182,16 @@ class Misc:
         elif user is ctx.author:
             await ctx.send("Sorry to see you alone ;-;")
             return
-        else:
-            author = user.display_name
-            user = ctx.author.display_name
-            await ctx.send(italics("{}".format(author) + " got a kiss from " + "{}".format(user)))
-            await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/kiss', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/kiss') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{user} got a hug from {author}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
+
     
     @commands.command()
     async def hug(self, ctx, user : discord.Member = None):
@@ -198,10 +204,15 @@ class Misc:
             embed.set_image(url="https://readifgay.com/images/selfhug.gif")
             await ctx.send(embed=embed)
             return
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(author) + " got a hug from " + "{}".format(user)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/hug', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/hug') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{user} got a hug from {author}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
     
     @commands.command()
     async def tickle(self, ctx, user : discord.Member = None):
@@ -212,10 +223,15 @@ class Misc:
         elif user is ctx.author:
             await ctx.send("So you can manage to tickle yourself huh")
             return
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(author) + " tickled " + "{}".format(user)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/tickle', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/tickle') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{author} tickled {user}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def pat(self, ctx, user : discord.Member = None):
@@ -226,17 +242,27 @@ class Misc:
         elif user is ctx.author:
             await ctx.send("***Pats self***")
             return
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(author) + " got a pat from " + "{}".format(user)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/pat', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/pat') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{user} got a pat from {author}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def giveavatar(self, ctx):
         """ Gives you a avatar to use """
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(user) + ", Here is your avatar"))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/avatar', 'url')
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/avatar') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{author}, Here is your avatar"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def cuddle(self, ctx, user : discord.Member = None):
@@ -249,31 +275,37 @@ class Misc:
             embed.set_image(url="https://readifgay.com/images/cuddelingpillow.png")
             await ctx.send(embed=embed)
             return
-        author = user.display_name
-        user = ctx.author.display_name
-        await ctx.send(italics("{}".format(author) + " is cuddling with " + "{}".format(user)))
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/cuddle', 'url')
+        user = user.display_name
+        author = ctx.author.display_name
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/hug') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title=italics(f"{author} is cuddling with {user}"), color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def neko(self, ctx):
         """ Posts a picture of a neko """
-        await self.randomimageapi(ctx,'https://nekos.life/api/v2/img/neko', 'url')
-
-    async def catapi(self, ctx, url, endpoint):
-        try:
-            r = await http.get(url, res_method="json", no_cache=True)
-        except json.JSONDecodeError:
-            return await ctx.send("Couldn't find anything from the API")
-
-        url = (r[endpoint])
-        embed = discord.Embed(title="cat")
-        embed.set_image(url=url)
-        await ctx.send(embed=embed)
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/neko') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title="Here is your random neko picture.", color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def cat(self, ctx):
         """ Posts a random cat """
-        await self.catapi(ctx, 'https://nekos.life/api/v2/img/meow', 'url')
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://nekos.life/api/v2/img/meow') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title="Here is your random cat picture.", color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
     @commands.command()
     async def loli(self,ctx):
@@ -284,7 +316,13 @@ class Misc:
     @commands.command()
     async def dog(self, ctx):
         """ Posts a random dog """
-        await self.randomimageapi(ctx, 'https://random.dog/woof.json', 'url')
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://random.dog/woof.json') as r:
+                if r.status == 200:
+                    js = await r.json()
+                    embed=discord.Embed(title="Here is your random dog picture.", color=choice(embedcolors))
+                    embed.set_image(url=(js['url']))
+                    await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Misc(bot))
