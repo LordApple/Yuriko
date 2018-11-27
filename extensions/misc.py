@@ -188,7 +188,7 @@ class Misc:
             async with session.get('https://nekos.life/api/v2/img/kiss') as r:
                 if r.status == 200:
                     js = await r.json()
-                    embed=discord.Embed(title=italics(f"{user} got a hug from {author}"), color=choice(embedcolors))
+                    embed=discord.Embed(title=italics(f"{user} got a kiss from {author}"), color=choice(embedcolors))
                     embed.set_image(url=(js['url']))
                     await ctx.send(embed=embed)
 
