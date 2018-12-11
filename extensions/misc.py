@@ -91,6 +91,20 @@ class Misc:
                     await ctx.send(embed=embed)
 
     @commands.command()
+    async def sub(self,ctx,subreddit):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"http://api.reddit.com/r/{subreddit}/random") as r:
+                js = await r.json()
+                url = js[0]["data"]["children"][0]["data"]["url"]
+                name = js[0]["data"]["children"][0]["data"]["subreddit"]
+                post = js[0]["data"]["children"][0]["data"]["permalink"]
+                full_post = "https://www.reddit.com" + post
+                embed=discord.Embed(title=f"r/{name}",url=full_post,color=0xFF0000)
+                embed.set_image(url=url)
+                await ctx.send(embed=embed)
+
+
+    @commands.command()
     async def insult(self, ctx, *, user: discord.Member):
         """Insults a user for you"""
         await ctx.send("{},".format(user.display_name) + " {}".format(choice(insultlist)))
