@@ -80,6 +80,17 @@ class Misc:
         await ctx.send(embed=embed)
 
     @commands.command()
+    async def greentext(self,ctx):
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://api.reddit.com/r/greentext/random") as r:
+                if r.status == 200:
+                    js = await r.json()
+                    url = js[0]["data"]["children"][0]["data"]["url"]
+                    embed=discord.Embed(title=">Greentext",color=0x06FF00)
+                    embed.set_image(url=url)
+                    await ctx.send(embed=embed)
+
+    @commands.command()
     async def insult(self, ctx, *, user: discord.Member):
         """Insults a user for you"""
         await ctx.send("{},".format(user.display_name) + " {}".format(choice(insultlist)))
