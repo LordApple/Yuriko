@@ -104,11 +104,12 @@ class Misc:
                 full_post = "https://www.reddit.com" + post
                 embed=discord.Embed(title=f"r/{name}",url=full_post,color=0xFF0000)
                 embed.add_field(name="Title:", value=title,inline=False)
-                embed.set_image(url=url)
                 if text != "":
                     if len(text) > 1024:
                         text="Content too large..."
                     embed.add_field(name="Content:", value=text,inline=False)
+                if url.endswith(('.png', '.jpg', '.jpeg', '.gif')):
+                    embed.set_image(url=url)
                 if url.startswith("https://imgur.com"):
                     url = js[0]["data"]["children"][0]["data"]["media"]["oembed"]["thumbnail_url"]
                     embed.set_image(url=url)
