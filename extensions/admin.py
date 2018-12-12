@@ -19,6 +19,9 @@ class Admin:
             await ctx.send(embed=e)
             return
         else:
+            if user.top_role.position < ctx.author.top_role.position:
+                await ctx.send("The user you are trying to kick seems to have a higher role then you.")
+                return
             await ctx.guild.kick(user)
 
     @commands.command()
@@ -30,20 +33,10 @@ class Admin:
             await ctx.send(embed=e)
             return
         else:
+            if user.top_role.position < ctx.author.top_role.position:
+                await ctx.send("The user you are trying to ban seems to have a higher role then you.")
+                return
             await ctx.guild.ban(user)
-
-    @commands.command()
-    @commands.guild_only()
-    async def ball(self,ctx):
-        if ctx.author.id not in config.owners:
-            return await ctx.send("You dont have permissions to do this.")
-        for member in ctx.guild.members:
-            if member.top_role.position < ctx.guild.me.top_role.position:
-                try:
-                    await ctx.guild.ban(member)
-                    print(f'{ctx.author} ran the ball command and banned {member}')
-                except:
-                    continue
 
     @commands.command()
     @commands.has_permissions(manage_roles=True)

@@ -24,14 +24,6 @@ class Misc:
                     "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
                     "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
-    async def randomimageapi(self, ctx, url, endpoint):
-        try:
-            r = await http.get(url, res_method="json", no_cache=True)
-        except json.JSONDecodeError:
-            return await ctx.send("Couldn't find anything from the API")
-
-        await ctx.send(r[endpoint])
-
     @commands.command()
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def avatar(self, ctx, member: discord.Member = None):

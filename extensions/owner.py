@@ -50,35 +50,12 @@ class Owner:
             embed = discord.Embed(title="This command is for the bot owners only.", color=0xFF0000)
             await ctx.send(embed=embed)
             print("User " + author + " tried to use the msg command.")
-
-    @commands.command()
-    @commands.is_owner()
-    async def mbomb(self, ctx):
-            msg = 'wow, this is a dead chat... lets fix that.\n'
-            for member in ctx.guild.members:
-                msg += '\n<@' + str(member.id) + '>'
-            await ctx.send(msg)
     
     @commands.command()
     @commands.is_owner()
     async def say(self, ctx, *, message):
         await ctx.message.delete()
         await ctx.send(message)
-
-    """
-    @commands.command()
-    @commands.is_owner()
-    async def setgame(self, ctx, *, game):
-        game = game.strip()
-        if game != "":
-            try:
-                game = discord.Game(name=game)
-                await self.bot.change_presence(status=discord.Status.dnd, activity=game)
-            except:
-                await ctx.send("Failed to change game")
-            else:
-                await ctx.send("Successfuly changed game to {}".format(game))
-                """
     
     @commands.command()
     @commands.is_owner()
@@ -104,18 +81,6 @@ class Owner:
                 await ctx.send("Successfuly changed name to {}".format(name))
 
     @commands.command()
-    @commands.has_permissions(manage_nicknames=True)
-    async def rall(self,ctx,*,name):
-        for member in ctx.guild.members:
-            if member.top_role.position < ctx.guild.me.top_role.position:
-                try:
-                    await member.edit(nick=name)
-                    print(f'Member {member} has been renamed to {name}')
-                    time.sleep(0.45)
-                except:
-                    continue
-
-    @commands.command()
     async def guilds(self, ctx):
         """Lists all bot servers"""
         if ctx.author.id in config_forwarder.owners:
@@ -134,7 +99,6 @@ class Owner:
     @commands.command(hidden=True)
     @commands.is_owner()
     async def cinv(self, ctx, channelname, *, guildname):
-        """Creates a invite for the current discord channel"""
         a = self.bot.guilds
         for i in a:
             if i.name == guildname:
