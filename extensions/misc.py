@@ -109,6 +109,65 @@ class Misc:
                 elif nsfw == True and ctx.channel.is_nsfw(): await ctx.send(embed=embed)
                 else: await ctx.send("The link is flaged as NSFW, try again in a NSFW channel.")
 
+    @commands.command()
+    async def github(self,ctx,user,repo=None):
+        async with aiohttp.ClientSession() as session:
+            if repo == None:
+                async with session.get(f"https://api.github.com/users/{user}") as r:
+                    if r.status == 200:
+                        js = await r.json()
+                        login = js["login"]
+                        public_repos = js["public_repos"]
+                        public_gists = js["public_gists"]
+                        html_url = js["html_url"]
+                        followers = js["followers"]
+                        following = js["following"]
+                        avatar_url = js["avatar_url"]
+
+                        embed=discord.Embed(title=f"Github user: {login}")
+                        embed.add_field(name="Username",value=login)
+                        embed.add_field(name="Public Repos",value=public_repos)
+                        embed.add_field(name="Public Gists",value=public_gists)
+                        embed.add_field(name="Following",value=following)
+                        embed.add_field(name="Followers",value=followers)
+                        embed.add_field(name="GitHub URL",value=html_url)
+                        embed.set_image(url=avatar_url)
+                        await ctx.send(embed=embed)
+            else:
+                async with session.get(f"https://api.github.com/repos/{user}/{repo}") as r:
+                    if r.status == 200:
+                        js = await r.json()
+                        reponame = js["full_name"]
+                        description = js["description"]
+                        name = js["name"]
+                        default_branch = js["default_branch"]
+                        fork = js["fork"]
+                        git_url = js["git_url"]
+                        clone_url = js["clone_url"]
+                        stargazers_count = js["stargazers_count"]
+                        watchers_count = js["watchers_count"]
+                        forks_count = js["forks_count"]
+                        network_count = js["network_count"]
+                        subscribers_count = js["subscribers_count"]
+                        open_issues_count = js["open_issues_count"]
+                        svn_url = js["svn_url"]
+
+                        embed=discord.Embed(title=f"GitHub Repo: {reponame}")
+                        embed.add_field(name="Description",value=description)
+                        embed.add_field(name="Name", value=name,inline=False)
+                        embed.add_field(name="Default Branch",value=default_branch,inline=True)
+                        embed.add_field(name="Is Fork",value=fork)
+                        embed.add_field(name="Forks",value=forks_count)
+                        embed.add_field(name="Networks",value=network_count)
+                        embed.add_field(name="Open Issues",value=open_issues_count)
+                        embed.add_field(name="Stargazers",value=stargazers_count)
+                        embed.add_field(name="Subscribers",value=subscribers_count)
+                        embed.add_field(name="Watchers",value=watchers_count)
+                        embed.add_field(name="GitHub URL",value=svn_url,inline=False)
+                        embed.add_field(name="Clone URL",value=clone_url)
+                        embed.add_field(name="Git URL",value=git_url)
+                        await ctx.send(embed=embed)
+
 
 
 
