@@ -87,27 +87,30 @@ class Misc:
         async with aiohttp.ClientSession() as session:
             async with session.get(f"http://api.reddit.com/r/{subreddit}/random") as r:
                 js = await r.json()
-                url = js[0]["data"]["children"][0]["data"]["url"]
-                name = js[0]["data"]["children"][0]["data"]["subreddit"]
-                post = js[0]["data"]["children"][0]["data"]["permalink"]
-                title = js[0]["data"]["children"][0]["data"]["title"]
-                text = js[0]["data"]["children"][0]["data"]["selftext"]
-                nsfw = js[0]["data"]["children"][0]["data"]["over_18"]
-                full_post = "https://www.reddit.com" + post
-                embed=discord.Embed(title=f"r/{name}",url=full_post,color=0xFF0000)
-                embed.add_field(name="Title:", value=title,inline=False)
-                if text != "":
-                    if len(text) > 1024:
-                        text="Content too large..."
-                    embed.add_field(name="Content:", value=text,inline=False)
-                if url.endswith(('.png', '.jpg', '.jpeg', '.gif')):
-                    embed.set_image(url=url)
-                if url.startswith("https://imgur.com"):
-                    url = js[0]["data"]["children"][0]["data"]["media"]["oembed"]["thumbnail_url"]
-                    embed.set_image(url=url)
-                if nsfw == False: await ctx.send(embed=embed)
-                elif nsfw == True and ctx.channel.is_nsfw(): await ctx.send(embed=embed)
-                else: await ctx.send("The link is flaged as NSFW, try again in a NSFW channel.")
+                try:
+                    url = js[0]["data"]["children"][0]["data"]["url"]
+                    name = js[0]["data"]["children"][0]["data"]["subreddit"]
+                    post = js[0]["data"]["children"][0]["data"]["permalink"]
+                    title = js[0]["data"]["children"][0]["data"]["title"]
+                    text = js[0]["data"]["children"][0]["data"]["selftext"]
+                    nsfw = js[0]["data"]["children"][0]["data"]["over_18"]
+                    full_post = "https://www.reddit.com" + post
+                    embed=discord.Embed(title=f"r/{name}",url=full_post,color=0xFF0000)
+                    embed.add_field(name="Title:", value=title,inline=False)
+                    if text != "":
+                        if len(text) > 1024:
+                            text="Content too large..."
+                        embed.add_field(name="Content:", value=text,inline=False)
+                    if url.endswith(('.png', '.jpg', '.jpeg', '.gif')):
+                        embed.set_image(url=url)
+                    if url.startswith("https://imgur.com"):
+                        url = js[0]["data"]["children"][0]["data"]["media"]["oembed"]["thumbnail_url"]
+                        embed.set_image(url=url)
+                    if nsfw == False: await ctx.send(embed=embed)
+                    elif nsfw == True and ctx.channel.is_nsfw(): await ctx.send(embed=embed)
+                    else: await ctx.send("The link is flaged as NSFW, try again in a NSFW channel.")
+                except KeyError:
+                    await ctx.send("That sub-reddit is probably cool, but i was unable to fetch anything from it.")
 
     @commands.command()
     async def github(self,ctx,user,repo=None):
