@@ -98,10 +98,16 @@ class Misc:
                 url = js[0]["data"]["children"][0]["data"]["url"]
                 name = js[0]["data"]["children"][0]["data"]["subreddit"]
                 post = js[0]["data"]["children"][0]["data"]["permalink"]
+                nsfw = js[0]["data"]["children"][0]["data"]["over_18"]
                 full_post = "https://www.reddit.com" + post
                 embed=discord.Embed(title=f"r/{name}",url=full_post,color=0xFF0000)
                 embed.set_image(url=url)
-                await ctx.send(embed=embed)
+                if nsfw == False: await ctx.send(embed=embed)
+                elif nsfw == True and ctx.channel.is_nsfw(): await ctx.send(embed=embed)
+                else: await ctx.send("The link is flaged as NSFW, try again in a NSFW channel.")
+
+
+
 
 
     @commands.command()
