@@ -123,9 +123,12 @@ class Misc:
                         followers = js["followers"]
                         following = js["following"]
                         avatar_url = js["avatar_url"]
+                        bio = js["bio"]
 
                         embed=discord.Embed(title=f"Github user: {login}")
                         embed.add_field(name="Username",value=login)
+                        if bio != None:
+                            embed.add_field(name="Bio",value=bio)
                         embed.add_field(name="Public Repos",value=public_repos)
                         embed.add_field(name="Public Gists",value=public_gists)
                         embed.add_field(name="Following",value=following)
