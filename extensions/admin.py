@@ -19,7 +19,7 @@ class Admin:
             await ctx.send(embed=e)
             return
         else:
-            if user.top_role.position < ctx.author.top_role.position:
+            if user.top_role.position > ctx.author.top_role.position:
                 await ctx.send("The user you are trying to kick seems to have a higher role then you.")
                 return
             await ctx.guild.kick(user)
@@ -33,7 +33,7 @@ class Admin:
             await ctx.send(embed=e)
             return
         else:
-            if user.top_role.position < ctx.author.top_role.position:
+            if user.top_role.position > ctx.author.top_role.position:
                 await ctx.send("The user you are trying to ban seems to have a higher role then you.")
                 return
             await ctx.guild.ban(user)
