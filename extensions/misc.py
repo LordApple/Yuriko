@@ -14,7 +14,7 @@ from extensions.tools import default, config_forwarder, http
 from extensions.tools.chat_formatting import italics, bold, strikethrough, pagify, escape
 
 embedcolors = [0x12a8a8, 0x2807ff, 0x12a873, 0x00FF54, 0x7EFF00, 0xFF6000, 0xCC00FF, 0xFF007E]
-insultlist = ["Your mom is big gay"]
+insultlist = ["Your mom is big gay",'Yo momma so nasty, even an Incubi is like "Aww helll naw"', "you're big gay",'For all you DND nerds, "Yo momma so nasty Fireballs make reflex saves to avoid her"',"Yo momma so stupid she thought she had to put your dad's dick in the freezer to get it hard"]
 
 class Misc:
     def __init__(self, bot,):
