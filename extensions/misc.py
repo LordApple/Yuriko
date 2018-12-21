@@ -247,6 +247,23 @@ class Misc:
             embed.add_field(name="Created", value=default.date(ctx.guild.created_at), inline=True)
             await ctx.send(embed=embed)
 
+    @commands.cooldown(1, 1, commands.BucketType.default)
+    @commands.command(name="screenshot",aliases=["ss"])
+    async def screenshot(self,ctx,url):
+        with open("config.json") as f:
+            config = json.load(f)
+        if ctx.channel.is_nsfw() != True:
+            embed=discord.Embed(color=0xff0022, title="This command can only be used in NSFW flagged channels.")
+            return await ctx.send(embed=embed)
+        url = url.lower()
+        if not url.startswith("http"):
+            url = "http://" + url
+        api_key = config.get("apiflash")
+        ss = f"https://api.apiflash.com/v1/urltoimage?access_key={api_key}&url={url}"
+        embed=discord.Embed(title=url,color=choice(embedcolors))
+        embed.set_image(url=ss)
+        await ctx.send(embed=embed)
+
 
     @commands.command()
     @commands.guild_only()
