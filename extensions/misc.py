@@ -99,8 +99,17 @@ class Misc:
                     embed.add_field(name="Title:", value=title,inline=False)
                     if text != "":
                         if len(text) > 1024:
-                            text="Content too large..."
-                        embed.add_field(name="Content:", value=text,inline=False)
+                            text1 = text[:1000]
+                            text2 = text[1000:]
+                            embed.add_field(name="Content:", value=text1,inline=False)
+                            if len(text2) > 1024:
+                                text3 = text2[:1024]
+                                embed.add_field(name="\a", value=text2,inline=False)
+                                embed.add_field(name="\a", value=text3,inline=False)
+                            else:
+                                embed.add_field(name="\a", value=text2,inline=False)
+                        else:
+                            embed.add_field(name="Content:", value=text,inline=False)
                     if url.endswith(('.png', '.jpg', '.jpeg', '.gif')):
                         embed.set_image(url=url)
                     if url.startswith("https://imgur.com"):
