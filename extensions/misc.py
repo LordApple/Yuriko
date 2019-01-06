@@ -103,7 +103,8 @@ class Misc:
                             text2 = text[1000:]
                             embed.add_field(name="Content:", value=text1,inline=False)
                             if len(text2) > 1024:
-                                text3 = text2[:1024]
+                                text2 = text[1000:2000]
+                                text3 = text[2000:3000]
                                 embed.add_field(name="\a", value=text2,inline=False)
                                 embed.add_field(name="\a", value=text3,inline=False)
                             else:
