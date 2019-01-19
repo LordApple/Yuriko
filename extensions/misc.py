@@ -463,7 +463,7 @@ class Misc:
         for x in msg:
             if x in emojis:
                 new_msg += f"{emojis[x]}"
-        if len(new_msg):
+        if len(new_msg) == 0:
             await ctx.send("Length of msg is 0, so i cant send."),
             return
         if len(new_msg) >= 2000:
