@@ -463,6 +463,9 @@ class Misc:
         for x in msg:
             if x in emojis:
                 new_msg += f"{emojis[x]}"
+        if len(new_msg):
+            await ctx.send("Length of msg is 0, so i cant send."),
+            return
         if len(new_msg) >= 2000:
             for page in pagify(new_msg,escape=False):
                 await ctx.send(page)
