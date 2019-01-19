@@ -457,7 +457,7 @@ class Misc:
         ,"m":":regional_indicator_m:","n":":regional_indicator_n:","o":":regional_indicator_o:","p":":regional_indicator_p:","q":":regional_indicator_q:","r":":regional_indicator_r:"
         ,"s":":regional_indicator_s:","t":":regional_indicator_t:","u":":regional_indicator_u:","v":":regional_indicator_v:","w":":regional_indicator_w:","x":":regional_indicator_x:"
         ,"y":":regional_indicator_y:","z":":regional_indicator_z:"," ": "  ","1":":one:","2":":two:","3":":three:","4":":four:","five":":five:","6":":six:","7":":seven:","8":":eight:"
-        ,"9":":nine:","0",":zero:"
+        ,"9":":nine:","0": ":zero:"
         }
         msg = args.lower()
         new_msg = ""
