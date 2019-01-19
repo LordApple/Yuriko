@@ -25,7 +25,7 @@ class Events:
             config = json.load(f)
         if not len(config.get("cleverbot")) == 0:
             msg = message.content.split()
-            if msg[0] == (f"<@!{self.bot.user.id}>"):
+            if msg[0] == (f"<@!{self.bot.user.id}>") or msg[0] == f"<@{self.bot.user.id}>":
                 msg[0] = ""
                 msg = "".join(msg)
                 async with aiohttp.ClientSession() as session:
