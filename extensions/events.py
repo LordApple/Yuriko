@@ -23,17 +23,20 @@ class Events:
     async def on_message(self,message):
         with open("config.json") as f:
             config = json.load(f)
-        if not len(config.get("cleverbot")) == 0:
-            msg = message.content.split()
-            if msg[0] == (f"<@!{self.bot.user.id}>") or msg[0] == f"<@{self.bot.user.id}>":
-                msg[0] = ""
-                msg = "".join(msg)
-                async with aiohttp.ClientSession() as session:
-                    async with session.get("https://www.cleverbot.com/getreply?key={}&input={}".format(config.get("cleverbot"),msg)) as r:
-                        if r.status == 200:
-                            js = await r.json()
-                            await message.channel.send(js["output"])
 
+        if not len(config.get("cleverbot")) == 0:
+            try:
+                msg = message.content.split()
+                if msg[0] == (f"<@!{self.bot.user.id}>") or msg[0] == f"<@{self.bot.user.id}>":
+                    msg[0] = ""
+                    msg = "".join(msg)
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get("https://www.cleverbot.com/getreply?key={}&input={}".format(config.get("cleverbot"),msg)) as r:
+                            if r.status == 200:
+                                js = await r.json()
+                                await message.channel.send(js["output"])
+            except:pass
+                
     async def on_ready(self):
         print('Logged in as ' + self.bot.user.name + "  ID: " + (str(self.bot.user.id)))
         print('--------')
